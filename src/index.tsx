@@ -1,29 +1,34 @@
 import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screens/home';
+import Settings from './screens/settings';
 import Splash from './components/Splash';
-import { StatusBar, StyleSheet, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import Emom from './screens/emom';
+import Amrap from './screens/amrap';
+import ForTime from './screens/forTime';
+import { PaperProvider } from 'react-native-paper';
+import { CombinedDarkTheme } from './utils/theme';
 
+const Stack = createNativeStackNavigator();
 
 const FitTimer = () => {
-
-
     return (
-        <Splash>
-            <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
-                <StatusBar />
-            </View>
-        </Splash>
+        <PaperProvider theme={CombinedDarkTheme}>
+            <NavigationContainer theme={CombinedDarkTheme}>
+                <Splash>
+                    <Stack.Navigator initialRouteName="Home"
+                        screenOptions={{ headerShown: false }}>
+                        <Stack.Screen name="Home" component={Home} />
+                        <Stack.Screen name="Emom" component={Emom} />
+                        <Stack.Screen name="Amrap" component={Amrap} />
+                        <Stack.Screen name="ForTime" component={ForTime} />
+                        <Stack.Screen name="Settings" component={Settings} />
+                    </Stack.Navigator>
+                </Splash>
+            </NavigationContainer>
+        </PaperProvider>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default FitTimer;

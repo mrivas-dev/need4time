@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { StatusBar } from 'expo-status-bar';
 import { Animated, Dimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Logo from "../../assets/img/transparent.png";
 import { styles } from './styles';
-import { StatusBar } from 'expo-status-bar';
 
 const Splash = ({ children }: any) => {
 
@@ -18,7 +18,7 @@ const Splash = ({ children }: any) => {
     const animation_scaleTitle = Animated.timing(scaleTitle, { toValue: 0.8, useNativeDriver: true });
 
     const moveLogo = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
-    const animation_moveLogo = Animated.timing(moveLogo, { toValue: { x: (Dimensions.get("window").width / 2) - 35, y: (Dimensions.get('window').height / 2) - 5 }, useNativeDriver: true });
+    const animation_moveLogo = Animated.timing(moveLogo, { toValue: { x: (Dimensions.get("window").width / 2) - 30, y: (Dimensions.get('window').height / 2) - 5 }, useNativeDriver: true });
 
     const moveTitle = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     const animation_moveTitle = Animated.timing(moveTitle, { toValue: { x: 0, y: (Dimensions.get('window').height / 2) - 90 }, useNativeDriver: true });
@@ -48,7 +48,6 @@ const Splash = ({ children }: any) => {
                         { translateY: startAnimation }
                     ]
                 }, styles.topbarWrapper)}>
-
                 <Animated.View style={styles.topBarLogoWrapper}>
                     <Animated.Image source={Logo} style={
                         Object.assign({
@@ -67,11 +66,10 @@ const Splash = ({ children }: any) => {
                                 { scale: scaleTitle }
                             ]
                         }, styles.topBarTitleWrapper)}>
-                        FitTimer
+                        Need4Time
                     </Animated.Text>
                 </Animated.View>
             </Animated.View>
-
             <Animated.View style={
                 Object.assign({
                     transform: [

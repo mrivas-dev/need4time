@@ -1,18 +1,14 @@
-import { AppRegistry } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+import * as React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { expo } from './app.json';
 import FitTimer from './src';
 
 const Main = () => {
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
-        <FitTimer />
-      </SafeAreaProvider>
-    </PaperProvider>
+    <SafeAreaProvider>
+      <FitTimer />
+    </SafeAreaProvider>
   );
 }
+
 export default Main;
 
-AppRegistry.registerComponent(expo.name, () => Main);
