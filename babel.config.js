@@ -3,13 +3,8 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     env: {
-      development: {
-        plugins: [
-          'react-native-reanimated/plugin'
-        ]
-      },
       production: {
-        plugins: ['react-native-reanimated/plugin, react-native-paper/babel'],
+        plugins: ['react-native-paper/babel'],
       },
     },
   };
