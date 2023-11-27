@@ -1,14 +1,13 @@
-import { Button } from 'react-native';
+import { Button } from 'react-native-paper';
 import Layout from '../../components/Layout';
+import Timer from '../../components/Timer';
 import { styles } from './styles';
 
 const ForTime = ({ navigation }: any) => {
     return (
         <Layout style={styles.container}>
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate('Home')}
-            />
+            <Timer initialMinutes={0} initialSeconds={10} />
+            <Button onPress={() => navigation.navigate('Home')} >Go to Home</Button>
         </Layout>
     );
 }

@@ -31,6 +31,12 @@
         "projectId": "0c5c83dc-d53e-4fb8-a635-0041d558bc85"
       }
     },
-    "owner": "mrivas90"
+    "owner": "mrivas90",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/0c5c83dc-d53e-4fb8-a635-0041d558bc85"
+    }
   }
 }

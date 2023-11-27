@@ -1,4 +1,3 @@
-import { Button } from 'react-native';
 import Layout from '../../components/Layout';
 import { styles } from './styles';
 import SoundSettings from './Sound';
