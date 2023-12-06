@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from 'react-native-paper';
 import Layout from '../../components/Layout';
 import { styles } from './styles';

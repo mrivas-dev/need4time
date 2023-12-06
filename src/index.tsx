@@ -7,6 +7,7 @@ import Splash from './components/Splash';
 import Emom from './screens/emom';
 import Amrap from './screens/amrap';
 import ForTime from './screens/forTime';
+import Timer from './screens/timer';
 import { PaperProvider } from 'react-native-paper';
 import { CombinedDarkTheme } from './utils/theme';
 
@@ -24,6 +25,7 @@ const FitTimer = () => {
                         <Stack.Screen name="Amrap" component={Amrap} />
                         <Stack.Screen name="ForTime" component={ForTime} />
                         <Stack.Screen name="Settings" component={Settings} />
+                        <Stack.Screen name="Timer" component={Timer} />
                     </Stack.Navigator>
                 </Splash>
             </NavigationContainer>

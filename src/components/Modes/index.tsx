@@ -46,6 +46,14 @@ const Modes = () => {
                     </Card.Content>
                 </TouchableRipple >
             </Card>
+            <Card style={styles.modeCard}>
+                <TouchableRipple onPress={() => navigation.navigate({ name: "Timer" } as never)} rippleColor="rgba(0, 0, 0, .32)">
+                    <Card.Content>
+                        <Card.Cover source={require('../../assets/modes/timer.png')} />
+                        <Text style={styles.modeTitle} variant="titleLarge">Timer</Text>
+                    </Card.Content>
+                </TouchableRipple >
+            </Card>
         </View>
     );
 };

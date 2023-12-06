@@ -1,3 +1,4 @@
+import React from 'react';
 import Modes from '../../components/Modes';
 import Layout from '../../components/Layout';
 import { StyleSheet } from 'react-native';
