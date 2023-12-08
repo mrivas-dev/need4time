@@ -4,7 +4,6 @@ import {
     Dimensions,
     StyleSheet,
     View,
-    Image,
 } from 'react-native';
 import { TouchableRipple, Card, Text } from 'react-native-paper';
 

@@ -1,55 +1,93 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Text } from 'react-native-paper';
+import CountdownCircleTimer from './CircularProgress';
+import { styles } from './styles';
+import WithSound from '../../hoc/withSound';
+import TimerButton from './TimerButton';
 
 const Timer = ({
-    initialSeconds,
-    initialMinutes
+    initialDuration,
+    initialLaps,
+    isMakingSound,
+    cleanUpSound,
+    stopSound,
+    startSound
 }: any) => {
 
-    const [isRunning, setIsRunning] = React.useState<boolean>(false);
-    const [seconds, setSeconds] = React.useState<number>(initialSeconds || 10);
-    const [minutes, setMinutes] = React.useState<number>(initialMinutes || 0);
+    const [isFinish, setFinish] = React.useState<boolean>(false);
+    const [isRunning, setRunning] = React.useState<boolean>(false);
+    const [isFirstTen, setFirstTen] = React.useState<boolean>(true);
+    const [laps, setLaps] = React.useState<number>(initialLaps || 1);
+    const [currentLap, setCurrentLap] = React.useState<number>(1);
+    const [totalDuration, setTotalDuration] = React.useState<number>(initialDuration);
 
-    React.useEffect(() => {
-        let myInterval = setInterval(() => {
-            if (isRunning) {
-                if (seconds > 0) {
-                    setSeconds(seconds - 1);
-                }
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        // onFinishLap();
-                        // if (isMakingSound) {
-                        //     cleanUpSound();
-                        //     stopSound();
-                        // } else {
-                        //     stopSound();
-                        // }
-                        clearInterval(myInterval)
-                    } else {
-                        setMinutes(minutes - 1);
-                        setSeconds(59);
-                    }
-                }
-            }
-        }, 1000)
-        return () => {
-            clearInterval(myInterval);
-        };
-    });
+    const onStop = () => { }
+
+    const initTime = () => {
+        setTotalDuration(initialDuration);
+    }
+
+    const startNewLap = () => {
+        if (currentLap < laps) {
+            initTime();
+            setCurrentLap((lap) => lap + 1);
+        }
+    }
+
+    const onFinishLap = () => {
+        if (isFirstTen) {
+            setFirstTen(false);
+            initTime();
+        }
+        if (currentLap < laps) {
+            startNewLap();
+        } else {
+            setRunning(false);
+            setFinish(true);
+        }
+        return { shouldRepeat: !isFinish };
+    }
+
+
+    const reset = () => {
+        initTime();
+        setFirstTen(true);
+        setCurrentLap(1);
+        setLaps(initialLaps || 1);
+    }
+
+
+    React.useEffect(()=>{
+        if(initialDuration){
+            reset();
+        }
+    }, [JSON.stringify(initialDuration)])
+
+    const renderFancy = () => {
+        return (
+            <CountdownCircleTimer
+                keyId={`timer-${currentLap}`}
+                isPlaying={isRunning}
+                isFinish={isFinish}
+                duration={totalDuration}
+                finishLap={onFinishLap}
+            />
+        )
+    };
 
     return (
-        <View>
-            <Text>Minutes: {minutes}</Text>
-            <Text>Seconds: {seconds}</Text>
-            <Button
-                onPress={() => setIsRunning(prev => !prev)}
-            >
-                {`${!!isRunning ? 'Pause' : 'Go!'}`}
-            </Button>
+        <View style={styles.container}>
+            <Text>{currentLap}/{initialLaps}</Text>
+            {renderFancy()}
+            <TimerButton
+                isRunning={isRunning}
+                setRunning={setRunning}
+                isFinish={isFinish}
+                onStop={onStop}
+            />
         </View>
     )
 }
 
-export default Timer;
+export default WithSound(Timer);
