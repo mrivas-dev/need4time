@@ -22,10 +22,12 @@ const Timer = ({
     const [currentLap, setCurrentLap] = React.useState<number>(1);
     const [totalDuration, setTotalDuration] = React.useState<number>(initialDuration);
 
-    const onStop = () => { }
+    const onStop = () => { reset(); }
 
     const initTime = () => {
         setTotalDuration(initialDuration);
+        setCurrentLap(5);
+        setCurrentLap(1);
     }
 
     const startNewLap = () => {
@@ -62,10 +64,11 @@ const Timer = ({
         if (initialDuration) {
             reset();
         }
-    }, [JSON.stringify(initialDuration)])
+    }, [initialDuration])
 
-    const renderFancy = () => {
-        return (
+    return (
+        <View style={styles.container}>
+            <Text>{currentLap}/{initialLaps}</Text>
             <CountdownCircleTimer
                 keyId={`timer-${currentLap}`}
                 isPlaying={isRunning}
@@ -73,13 +76,6 @@ const Timer = ({
                 duration={isFirstTen ? 10 : totalDuration}
                 finishLap={onFinishLap}
             />
-        )
-    };
-
-    return (
-        <View style={styles.container}>
-            <Text>{currentLap}/{initialLaps}</Text>
-            {renderFancy()}
             <TimerButton
                 isRunning={isRunning}
                 setRunning={setRunning}

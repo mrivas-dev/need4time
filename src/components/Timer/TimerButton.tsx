@@ -8,7 +8,7 @@ const TimerButton = ({
     onStop
 }: any) => {
     const runningLabel = (): string => {
-        return (!!isRunning ? 'Pause' : 'Continue')
+        return (!!isRunning ? 'Pause' : 'Start')
     };
     const pausedLabel = (): string => {
         return (!!isRunning ? 'Pause' : 'Go!')

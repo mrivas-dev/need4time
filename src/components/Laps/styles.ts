@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         width: 'auto',
         alignItems: 'center',
         marginBottom: 45,
+        zIndex: 1
     },
     labelContainer: {
         width: '50%',

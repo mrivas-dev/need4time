@@ -18,8 +18,7 @@ const FitTimer = () => {
         <PaperProvider theme={CombinedDarkTheme}>
             <NavigationContainer theme={CombinedDarkTheme}>
                 <Splash>
-                    <Stack.Navigator initialRouteName="Home"
-                        screenOptions={{ headerShown: false }}>
+                    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                         <Stack.Screen name="Home" component={Home} />
                         <Stack.Screen name="Emom" component={Emom} />
                         <Stack.Screen name="Amrap" component={Amrap} />

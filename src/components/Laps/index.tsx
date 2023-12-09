@@ -13,7 +13,7 @@ const Laps = ({ onSelectLaps = (laps: number) => {} }) => {
         if (laps) {
             onSelectLaps(laps);
         }
-    }, [JSON.stringify(laps)])
+    }, [laps])
     return (
         <View style={styles.lapsContainer}>
             <View style={styles.labelContainer}>
@@ -25,12 +25,12 @@ const Laps = ({ onSelectLaps = (laps: number) => {} }) => {
                         display: 'flex',
                         width: '100%'
                     }}
-                    itemStyle={{ color: white, height: 150 }}
+                    numberOfLines={1}
+                    itemStyle={{ color: white, height: 115 }}
                     selectedValue={laps}
                     onValueChange={(itemValue, itemIndex) =>
                         setLaps(itemValue)
                     }>
-                    <Picker.Item label="0" value="0" />
                     <Picker.Item label="1" value="1" />
                     <Picker.Item label="2" value="2" />
                     <Picker.Item label="3" value="3" />

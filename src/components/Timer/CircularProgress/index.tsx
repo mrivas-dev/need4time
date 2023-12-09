@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { useCountdown } from "react-native-countdown-circle-timer";
-import Constants from 'expo-constants';
 import { Defs, LinearGradient, Path, Stop, Svg } from "react-native-svg";
 import { PRIMARY_BG, PRIMARY_BLUE, white } from "../../../utils/colors";
+import { styles } from "./styles";
 
 const CountdownCircleTimer = ({ keyId, duration, isPlaying, isFinish, finishLap }) => {
     const {
@@ -69,24 +69,5 @@ const CountdownCircleTimer = ({ keyId, duration, isPlaying, isFinish, finishLap 
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: Constants.statusBarHeight,
-        padding: 8,
-    },
-    time: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: '100%',
-        height: '100%',
-    }
-});
 
 export default CountdownCircleTimer;

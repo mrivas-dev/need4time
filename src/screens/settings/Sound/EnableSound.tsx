@@ -4,7 +4,7 @@ import { styles } from './styles';
 import { List, Switch, Text } from 'react-native-paper';
 
 const EnableSound = () => {
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
     return (
