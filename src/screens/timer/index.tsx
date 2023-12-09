@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from 'react-native-paper';
 import Layout from '../../components/Layout';
 import Timer from '../../components/Timer';
-import { styles } from './styles';
+import Laps from '../../components/Laps';
 import { Picker } from '@react-native-picker/picker';
+import { styles } from './styles';
 import { white } from '../../utils/colors';
 import { View } from 'react-native';
 
@@ -16,7 +16,8 @@ const TimerPage = ({ navigation }: any) => {
     return (
         <Layout style={styles.container}>
             <View style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
-                <Picker
+                <Laps />
+                {/* <Picker
                     style={{ display: 'flex', width: '50%' }}
                     itemStyle={{ color: white }}
                     selectedValue={minutes}
@@ -53,7 +54,7 @@ const TimerPage = ({ navigation }: any) => {
                     <Picker.Item label="45" value="45" />
                     <Picker.Item label="50" value="50" />
                     <Picker.Item label="55" value="55" />
-                </Picker>
+                </Picker> */}
             </View>
             <View style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
                 <Timer initialDuration={Number(seconds) + (Number(minutes) * 60)} initialLaps={5} />

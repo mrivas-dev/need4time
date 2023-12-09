@@ -58,8 +58,8 @@ const Timer = ({
     }
 
 
-    React.useEffect(()=>{
-        if(initialDuration){
+    React.useEffect(() => {
+        if (initialDuration) {
             reset();
         }
     }, [JSON.stringify(initialDuration)])
@@ -70,7 +70,7 @@ const Timer = ({
                 keyId={`timer-${currentLap}`}
                 isPlaying={isRunning}
                 isFinish={isFinish}
-                duration={totalDuration}
+                duration={isFirstTen ? 10 : totalDuration}
                 finishLap={onFinishLap}
             />
         )
