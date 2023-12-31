@@ -1,8 +1,9 @@
-import { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from 'react';
+import { Audio } from 'expo-av';
 import { activateKeepAwakeAsync as activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
-import { INITIAL_STATE } from "./utils";
-import { NeedForTimeContext as MainContextType } from "./types";
-import { COUNTDOWN_SOUND, RACE_START_SOUND, RACE_STOP_SOUND } from "../utils/sounds";
+import { INITIAL_STATE } from './utils';
+import { NeedForTimeContext as MainContextType } from './types';
+import { COUNTDOWN_SOUND, RACE_START_SOUND, RACE_STOP_SOUND, SOUNDS } from '../utils/sounds';
 
 export const AppContext = createContext<MainContextType>(INITIAL_STATE);
 
@@ -14,6 +15,79 @@ const AppProvider = ({ children }: any) => {
     const [selectedStopSound, setStopSound] = useState<string>(RACE_STOP_SOUND);
     const [selectedCountDownSound, setCountDownSound] = useState<string>(COUNTDOWN_SOUND);
     const [selectedStartSound, setStartSound] = useState<string>(RACE_START_SOUND);
+    /* Sound shit */
+    const [sound, setSound] = useState<any>();
+    const [playing, setPlaying] = useState<boolean>(false);
+
+    const cleanUpSound = () => {
+        sound?.unloadAsync();
+        setSound(null);
+        setPlaying(false);
+    };
+
+    const onPlayBackStatusUpdate = ({ didJustFinish, shouldPlay }: any): any => {
+        if (didJustFinish && shouldPlay) {
+            cleanUpSound();
+        } else {
+            setPlaying(true);
+        }
+    }
+
+    const playCountdownSound = async () => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedCountDownSound].sound);
+            setSound(sound);
+            sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
+            await sound.playAsync();
+        }
+        catch (err) {
+            console.error(`Error in countdownSound, ${err}`);
+        }
+    };
+
+    const playStopSound = async () => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedCountDownSound].sound);
+            setSound(sound);
+            sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
+            await sound.playAsync();
+        }
+        catch (err) {
+            console.error(`Error in stopSound, ${err}`);
+        }
+    };
+
+    const playStartSound = async () => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedStartSound].sound);
+            setSound(sound);
+            sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
+            await sound.playAsync();
+        }
+        catch (err) {
+            console.error(`Error in startSound, ${err}`);
+        }
+    };
+
+    const playDynamicSound = async (dinamicSoundKey: string) => {
+        try {
+            const { sound } = await Audio.Sound.createAsync(SOUNDS[dinamicSoundKey].sound);
+            setSound(sound);
+            sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
+            await sound.playAsync();
+        }
+        catch (err) {
+            console.error(`Error in playSound, ${err}`);
+        }
+    };
+
+    useEffect(() => {
+        return sound
+            ? () => {
+                cleanUpSound();
+            }
+            : undefined;
+    }, [sound]);
 
     useEffect(() => {
         if (awakeMode) {
@@ -26,19 +100,29 @@ const AppProvider = ({ children }: any) => {
     return (
         <AppContext.Provider
             value={{
-                setDeveloperMode,
-                setZenMode,
-                setAwakeMode,
-                setSoundEnabled,
-                setCountDownSound,
-                setStartSound,
-                developerMode,
-                soundEnabled,
-                zenMode,
-                awakeMode,
-                selectedCountDownSound,
-                selectedStartSound,
-                selectedStopSound
+                sound: {
+                    soundEnabled,
+                    playing,
+                    selectedCountDownSound,
+                    selectedStartSound,
+                    selectedStopSound,
+                    setSoundEnabled,
+                    setCountDownSound,
+                    setStartSound,
+                    setStopSound,
+                    playDynamicSound,
+                    playStartSound,
+                    playStopSound,
+                    playCountdownSound
+                },
+                mode: {
+                    setDeveloperMode,
+                    developerMode,
+                    zenMode,
+                    awakeMode,
+                    setZenMode,
+                    setAwakeMode
+                }
             }}
         >
             {children}
