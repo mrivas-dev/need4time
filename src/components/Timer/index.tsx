@@ -52,12 +52,13 @@ const Timer = ({
 
 
     const reset = () => {
-        setKey(prevKey => prevKey + 5);
+        setKey(prevKey => prevKey + 1);
         setRunning(false);
         setStarted(false);
         setFirstTen(true);
         setFinish(false);
         setLaps(initialLaps || 1);
+        stopSound();
         initTime();
     }
 

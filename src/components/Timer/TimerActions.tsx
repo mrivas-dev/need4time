@@ -21,7 +21,7 @@ const TimerActions = ({
     return (
         <View style={styles.timerActionsContainer}>
             <Button
-                onPress={() => setRunning(prev => !prev)}
+                onPress={() => !!isFinish ? onStop() : setRunning(prev => !prev)}
             >
                 {`${!!isFinish ? 'Re Start' : runningLabel()}`}
             </Button>

@@ -93,6 +93,7 @@ const InnerCircle = ({
     )
 
     const renderRunningLabel = ({ remainingTime }): JSX.Element => {
+        const minutes = Math.floor(remainingTime / 60);
         const seconds = remainingTime % 60;
         if (!isFirstTen && isFirstLap && remainingTime === duration) {
             return renderGo();
@@ -102,7 +103,7 @@ const InnerCircle = ({
                 style={{ alignItems: 'center' }}
             >
                 <Text style={styles.numberLabel}>{calculateRemainingTimeText({ remainingTime })}</Text>
-                {!isFirstTen && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
+                {!isFirstTen && minutes === 0 && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
                 {!isFirstTen && seconds > 10 && <Text style={styles.smallLabel}>Tap to pause</Text>}
             </View>
         )
