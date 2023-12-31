@@ -1,10 +1,15 @@
 import React from 'react';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
 import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, TouchableRipple } from 'react-native-paper';
 import { useCountdown } from 'react-native-countdown-circle-timer';
 import { calculateRemainingTimeText } from '../../../utils/timer';
 import { styles } from './styles';
+
+const ANGLE = 10;
+const TIME = 100;
+const EASING = Easing.elastic(1.5);
 
 const InnerCircle = ({
     keyId,
@@ -16,15 +21,25 @@ const InnerCircle = ({
     isFinished,
     onPress,
 }) => {
-    const {
-        path,
-        pathLength,
-        stroke,
-        strokeDashoffset,
-        remainingTime,
-        elapsedTime,
-        
-    } = useCountdown({
+    const offset = useSharedValue(-750);
+    const scalation = useSharedValue(1);
+
+    const rotation = useSharedValue(0);
+
+    const wobbleStyle = useAnimatedStyle(() => ({
+        transform: [{ rotateZ: `${rotation.value}deg` }],
+    }));
+
+    const growAnimation = useAnimatedStyle(() => ({
+        transform: [{ scaleX: -scalation.value }],
+    }));
+
+    const translateAnimation = useAnimatedStyle(() => ({
+        transform: [{ translateX: offset.value }],
+    }));
+
+
+    const { remainingTime } = useCountdown({
         isPlaying,
         duration,
         colors: `url(#${keyId})`,
@@ -35,20 +50,40 @@ const InnerCircle = ({
                 style={{ alignItems: 'center' }}
             >
                 <Text>Well done!</Text>
-                <View
-                // enterStyle={{
-                //     scale: 5.5,
-                //     y: -10,
-                //     opacity: 0,
-                // }}
-                // animation="bouncy"
-                >
+                <Animated.View style={[{ scaleX: -.3 }, growAnimation]}>
                     <Text
-                        style={styles.finishedLabel}>You are a beast! 🔥</Text>
-                </View>
+                        style={styles.finishedLabel}>You are a beast!
+                    </Text>
+                </Animated.View>
+                <Animated.View style={[wobbleStyle]}>
+                    <TouchableRipple
+                        style={{ alignItems: 'center' }}
+                        onPress={() => handlePress()}
+                    >
+                        <Text style={styles.finishedLabel}>
+                            🔥
+                        </Text>
+                    </TouchableRipple>
+                </Animated.View>
             </View>
         )
     }
+
+    React.useEffect(() => {
+        offset.value = withRepeat(
+            withTiming(-offset.value, {
+                duration: 1000,
+                easing: Easing.inOut(Easing.quad)
+            }),
+            1,
+            false
+        );
+        scalation.value = withRepeat(
+            withTiming(-scalation.value, { duration: 950 }),
+            1,
+            false
+        );
+    }, []);
 
     const renderPausedLabel = ({ remainingTime }) => {
         return (
@@ -64,20 +99,14 @@ const InnerCircle = ({
                             </View>
                         )
 
-                        : (<View
-                        // enterStyle={{
-                        //     x: -1000,
-                        //     opacity: 0,
-                        // }}
-                        // animation="quick"
-                        >
+                        : (<Animated.View style={[{ right: 750 }, translateAnimation]}>
                             <AntDesign
                                 name="caretright"
                                 size={150}
                                 color="white"
                             />
 
-                        </View>)
+                        </Animated.View>)
                 }
                 <Text style={styles.pausedLabel}>{isStarted ? 'Tap to resume' : 'Tap to start'}</Text>
             </View>
@@ -110,7 +139,23 @@ const InnerCircle = ({
     }
 
     const runningLabel = ({ remainingTime, isPlaying }) => isPlaying ? renderRunningLabel({ remainingTime }) : renderPausedLabel({ remainingTime })
-
+    const handlePress = () => {
+        rotation.value = withSequence(
+            // deviate left to start from -ANGLE
+            withTiming(-ANGLE, { duration: TIME / 2, easing: EASING }),
+            // wobble between -ANGLE and ANGLE 7 times
+            withRepeat(
+                withTiming(ANGLE, {
+                    duration: TIME,
+                    easing: EASING,
+                }),
+                7,
+                true
+            ),
+            // go back to 0 at the end
+            withTiming(0, { duration: TIME / 2, easing: EASING })
+        );
+    };
     return (
         <TouchableRipple
             style={{ alignItems: 'center' }}
