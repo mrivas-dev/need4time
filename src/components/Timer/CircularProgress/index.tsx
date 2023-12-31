@@ -1,73 +1,56 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { useCountdown } from "react-native-countdown-circle-timer";
-import { Defs, LinearGradient, Path, Stop, Svg } from "react-native-svg";
-import { PRIMARY_BG, PRIMARY_BLUE, white } from "../../../utils/colors";
-import { styles } from "./styles";
+import React from 'react';
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import InnerCircle from "./InnerCircle";
+import { AppContext } from '../../../provider/index';
 
-const CountdownCircleTimer = ({ keyId, duration, isPlaying, isFinish, finishLap }) => {
-    const {
-        path,
-        pathLength,
-        stroke,
-        strokeDashoffset,
-        remainingTime,
-        elapsedTime,
-        size,
-        strokeWidth
-    } = useCountdown({
-        isPlaying,
-        duration,
-        size: 350,
-        colors: `url(#${keyId})`,
-        onComplete: finishLap,
-        initialRemainingTime: 10
-    });
-
-    const renderInnerText = () => {
-        return (isFinish
-            ? <Text style={{ color: white, fontSize: 50 }}> 🎉 </Text>
-            : (
-                <Text style={{ color: white, fontSize: 150 }}>{remainingTime}</Text>
-            )
-        )
-    }
-
+const StopWatch = ({
+    keyId,
+    duration,
+    isStarted,
+    isFirstTen,
+    isPlaying,
+    isFirstLap,
+    isFinish,
+    setRunning,
+    finishLap
+}) => {
+    const { sound: { soundEnabled, playCountdownSound, playStartSound } } = React.useContext(AppContext);
     return (
-        <View style={styles.container}>
-            <View style={{ width: size, height: size, position: 'relative' }}>
-                <Svg width={size} height={size}>
-                    <Defs>
-                        <LinearGradient id={keyId} x1="1" y1="0" x2="0" y2="0">
-                            <Stop offset="10%" stopColor={PRIMARY_BLUE} />
-                            <Stop offset="90%" stopColor={PRIMARY_BG} />
-                        </LinearGradient>
-                    </Defs>
-                    <Path
-                        d={path}
-                        fill="none"
-                        stroke="#d9d9d9"
-                        strokeWidth={strokeWidth}
-                    />
-                    {elapsedTime !== duration && (
-                        <Path
-                            d={path}
-                            fill="none"
-                            stroke={stroke}
-                            strokeLinecap="butt"
-                            strokeWidth={strokeWidth}
-                            strokeDasharray={pathLength}
-                            strokeDashoffset={strokeDashoffset}
-                        />
-                    )}
-                </Svg>
-                <View style={styles.time}>
-                    {renderInnerText()}
-                </View>
-            </View>
-        </View>
+        <CountdownCircleTimer
+            key={keyId}
+            size={350}
+            isPlaying={isPlaying}
+            duration={duration}
+            strokeLinecap={"butt"}
+            colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+            colorsTime={[10, 7, 5, 0]}
+            onComplete={() => { finishLap(); }}
+            onUpdate={(remaingTime) => {
+                if (soundEnabled) {
+                    if (remaingTime === 3 && isFirstLap) {
+                        playCountdownSound();
+                    }
+                    if (remaingTime === 3 && !isFirstLap) {
+                        playStartSound();
+                    }
+                }
+            }}
+        >
+            {() => (
+                <InnerCircle
+                    keyId={keyId}
+                    duration={duration}
+                    isStarted={isStarted}
+                    isFirstLap={isFirstLap}
+                    isFirstTen={isFirstTen}
+                    isPlaying={isPlaying}
+                    isFinished={isFinish}
+                    onPress={() => { setRunning(!isPlaying); }}
+                />)
+            }
+        </CountdownCircleTimer>
+
     );
-}
+};
 
-
-export default CountdownCircleTimer;
+export default StopWatch;

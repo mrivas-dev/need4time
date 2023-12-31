@@ -15,6 +15,7 @@ export const INITIAL_STATE = {
         playStartSound: () => { },
         playStopSound: () => { },
         playCountdownSound: () => { },
+        stopSound: () => { },
     },
     mode: {
         setDeveloperMode: () => { },

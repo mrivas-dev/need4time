@@ -12,6 +12,7 @@ interface SoundContext {
     playStartSound: () => void;
     playStopSound: () => void;
     playCountdownSound: () => void;
+    stopSound: () => void;
 };
 
 interface ModeContext {

@@ -18,5 +18,21 @@ export const styles = StyleSheet.create({
         top: 0,
         width: '100%',
         height: '100%',
-    }
+    },
+    numberLabel: {
+        fontSize: 100,
+        fontWeight: "400",
+    },
+    smallLabel: {
+        fontSize: 25,
+        fontWeight: "200",
+    },
+    pausedLabel: {
+        fontSize: 20,
+        fontWeight: "200",
+    },
+    finishedLabel: {
+        fontSize: 40,
+        fontWeight: "200",
+    },
 });

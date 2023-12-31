@@ -16,18 +16,18 @@ const AppProvider = ({ children }: any) => {
     const [selectedCountDownSound, setCountDownSound] = useState<string>(COUNTDOWN_SOUND);
     const [selectedStartSound, setStartSound] = useState<string>(RACE_START_SOUND);
     /* Sound shit */
-    const [sound, setSound] = useState<any>();
+    const [soundTrack, setSoundTrack] = useState<any>();
     const [playing, setPlaying] = useState<boolean>(false);
 
-    const cleanUpSound = () => {
-        sound?.unloadAsync();
-        setSound(null);
+    const stopSound = () => {
+        soundTrack?.unloadAsync();
+        setSoundTrack(null);
         setPlaying(false);
     };
 
     const onPlayBackStatusUpdate = ({ didJustFinish, shouldPlay }: any): any => {
         if (didJustFinish && shouldPlay) {
-            cleanUpSound();
+            stopSound();
         } else {
             setPlaying(true);
         }
@@ -36,7 +36,7 @@ const AppProvider = ({ children }: any) => {
     const playCountdownSound = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedCountDownSound].sound);
-            setSound(sound);
+            setSoundTrack(sound);
             sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
             await sound.playAsync();
         }
@@ -48,7 +48,7 @@ const AppProvider = ({ children }: any) => {
     const playStopSound = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedCountDownSound].sound);
-            setSound(sound);
+            setSoundTrack(sound);
             sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
             await sound.playAsync();
         }
@@ -60,7 +60,7 @@ const AppProvider = ({ children }: any) => {
     const playStartSound = async () => {
         try {
             const { sound } = await Audio.Sound.createAsync(SOUNDS[selectedStartSound].sound);
-            setSound(sound);
+            setSoundTrack(sound);
             sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
             await sound.playAsync();
         }
@@ -72,7 +72,7 @@ const AppProvider = ({ children }: any) => {
     const playDynamicSound = async (dinamicSoundKey: string) => {
         try {
             const { sound } = await Audio.Sound.createAsync(SOUNDS[dinamicSoundKey].sound);
-            setSound(sound);
+            setSoundTrack(sound);
             sound.setOnPlaybackStatusUpdate(onPlayBackStatusUpdate);
             await sound.playAsync();
         }
@@ -82,12 +82,12 @@ const AppProvider = ({ children }: any) => {
     };
 
     useEffect(() => {
-        return sound
+        return soundTrack
             ? () => {
-                cleanUpSound();
+                stopSound();
             }
             : undefined;
-    }, [sound]);
+    }, [soundTrack]);
 
     useEffect(() => {
         if (awakeMode) {
@@ -113,7 +113,8 @@ const AppProvider = ({ children }: any) => {
                     playDynamicSound,
                     playStartSound,
                     playStopSound,
-                    playCountdownSound
+                    playCountdownSound,
+                    stopSound
                 },
                 mode: {
                     setDeveloperMode,

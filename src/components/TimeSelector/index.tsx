@@ -11,7 +11,7 @@ const TimeSelector = ({ onTimeSelect = (duration: number) => { } }) => {
     const [minutes, setMinutes] = React.useState<number>(0);
     const [seconds, setSeconds] = React.useState<number>(5);
     React.useEffect(() => {
-        onTimeSelect(seconds + (minutes * 60));
+        onTimeSelect(Number(seconds) + Number(minutes * 60));
     }, [minutes, seconds])
     return (
         <View style={styles.timeSelectorContainer}>

@@ -8,18 +8,16 @@ import { View } from 'react-native';
 
 const TimerPage = ({ navigation }: any) => {
     const [laps, setLaps] = React.useState<number>(0);
-    const [minutes, setMinutes] = React.useState<number>(0);
-    const [seconds, setSeconds] = React.useState<number>(0);
-
+    const [duration, setDuration] = React.useState<number>(0);
 
     return (
         <Layout style={styles.layoutContainer}>
             <View style={styles.container}>
                 <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
-                <TimeSelector />
+                <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
             </View>
-            <View style={{ width: 'auto', display: 'flex', flexDirection: 'row' }}>
-                <Timer initialDuration={Number(seconds) + (Number(minutes) * 60)} initialLaps={laps} />
+            <View style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
+                <Timer initialDuration={duration} initialLaps={laps} />
             </View>
         </Layout>
     );

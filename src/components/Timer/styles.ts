@@ -6,5 +6,11 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    timerActionsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        paddingTop: 15,
+        paddingBottom: 55
     }
 });

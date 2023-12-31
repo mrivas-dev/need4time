@@ -10,12 +10,9 @@ import {
     TouchableRipple
 } from 'react-native-paper';
 import { SOUNDS } from '../../../utils/sounds';
-import WithSound from '../../../hoc/withSound';
+import { AppContext } from '../../../provider';
 
 const CountdownSoundSelection = ({
-    playSound,
-    isMakingSound,
-    cleanUpSound,
     soundEffectTitle,
     selected,
     onSelect
@@ -23,6 +20,9 @@ const CountdownSoundSelection = ({
     const [visible, setVisible] = React.useState(false);
     const [effectRunning, setEffectRunning] = React.useState<any>(null);
     const hideDialog = () => setVisible(false);
+
+    const { sound: { playing, stopSound, playDynamicSound } } = React.useContext(AppContext);
+
     return (
         <>
             <List.Item
@@ -52,17 +52,17 @@ const CountdownSoundSelection = ({
                                         <List.Item key={`${SOUNDS[soundKey].id}-${i}`} title={SOUNDS[soundKey].label} right={
                                             () =>
                                                 <Button
-                                                    icon={isMakingSound && soundKey === effectRunning ? 'pause' : 'play'}
+                                                    icon={playing && soundKey === effectRunning ? 'pause' : 'play'}
                                                     onPress={(event) => {
                                                         event.preventDefault();
-                                                        cleanUpSound();
-                                                        if (!isMakingSound) {
+                                                        stopSound();
+                                                        if (!playing) {
                                                             setEffectRunning(soundKey)
-                                                            playSound(soundKey);
+                                                            playDynamicSound(soundKey);
                                                         }
                                                     }}
                                                 >
-                                                    {isMakingSound && soundKey === effectRunning ? 'Playing' : 'Play'}
+                                                    {playing && soundKey === effectRunning ? 'Playing' : 'Play'}
                                                 </Button>
                                         }
                                         />
@@ -77,4 +77,4 @@ const CountdownSoundSelection = ({
     );
 };
 
-export default WithSound(CountdownSoundSelection);
+export default CountdownSoundSelection;
