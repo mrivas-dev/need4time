@@ -3,15 +3,14 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     lapsContainer: {
         display: 'flex',
-        flexDirection: 'row',
-        width: 'auto',
+        flexDirection: 'column',
         alignItems: 'center',
         marginBottom: 45,
         zIndex: 1
     },
     labelContainer: {
         width: '50%',
-        height: 150,
+        height: 50,
         justifyContent: 'center',
         paddingLeft: 15
     },

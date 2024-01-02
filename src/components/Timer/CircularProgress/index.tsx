@@ -17,8 +17,8 @@ const StopWatch = ({
     const { sound: { soundEnabled, playCountdownSound, playStartSound } } = React.useContext(AppContext);
     return (
         <CountdownCircleTimer
-            key={keyId}
             size={350}
+            key={keyId}
             isPlaying={isPlaying}
             duration={duration}
             strokeLinecap={"butt"}

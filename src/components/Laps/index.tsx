@@ -17,7 +17,7 @@ const Laps = ({ onSelectLaps = (laps: number) => {} }) => {
     return (
         <View style={styles.lapsContainer}>
             <View style={styles.labelContainer}>
-                <Text variant='titleLarge'> Laps: </Text>
+                <Text variant='titleLarge'> Select the laps</Text>
             </View>
             <View style={styles.selectorContainer}>
                 <Picker

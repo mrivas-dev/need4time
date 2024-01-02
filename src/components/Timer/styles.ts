@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
     },
     timerActionsContainer: {
         display: 'flex',
+        width: '75%',
         flexDirection: 'row',
+        justifyContent: 'space-around',
         paddingTop: 15,
         paddingBottom: 55
     }

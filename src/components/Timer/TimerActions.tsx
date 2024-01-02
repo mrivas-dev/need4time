@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, IconButton } from 'react-native-paper';
 import { styles } from './styles';
 
 const TimerActions = ({
@@ -10,26 +10,20 @@ const TimerActions = ({
     onStop
 }: any) => {
 
-    const runningLabel = (): string => {
-        return (!!isRunning ? 'Pause' : 'Start')
-    };
-
-    const pausedLabel = (): string => {
-        return (!!isRunning ? 'Pause' : 'Go!')
-    };
-
     return (
         <View style={styles.timerActionsContainer}>
-            <Button
+            <IconButton
+                icon={!!isRunning ? 'pause' : 'play'}
+                size={25}
+                mode="contained"
                 onPress={() => !!isFinish ? onStop() : setRunning(prev => !prev)}
-            >
-                {`${!!isFinish ? 'Re Start' : runningLabel()}`}
-            </Button>
-            <Button
+            />
+            <IconButton
+                icon="stop"
+                size={25}
+                mode="contained"
                 onPress={() => onStop()}
-            >
-                Stop
-            </Button>
+            />
         </View>
     );
 }
