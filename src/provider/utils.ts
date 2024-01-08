@@ -1,6 +1,9 @@
 import { COUNTDOWN_SOUND, RACE_START_SOUND, RACE_STOP_SOUND } from "../utils/sounds";
 
 export const INITIAL_STATE = {
+    alert: {
+        setAlert: () => { }
+    },
     sound: {
         soundEnabled: true,
         playing: false,

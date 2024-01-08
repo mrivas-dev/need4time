@@ -15,6 +15,10 @@ interface SoundContext {
     stopSound: () => void;
 };
 
+export interface AlertContext {
+    setAlert: (newMessage: string) => any;
+};
+
 interface ModeContext {
     setDeveloperMode: (param: any) => any;
     developerMode: boolean;
@@ -25,6 +29,7 @@ interface ModeContext {
 };
 
 export interface NeedForTimeContext {
+    alert: AlertContext;
     sound: SoundContext;
     mode: ModeContext;
 };

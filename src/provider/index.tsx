@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { Snackbar } from 'react-native-paper';
 import { Audio } from 'expo-av';
 import { activateKeepAwakeAsync as activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import { INITIAL_STATE } from './utils';
@@ -18,6 +19,19 @@ const AppProvider = ({ children }: any) => {
     /* Sound shit */
     const [soundTrack, setSoundTrack] = useState<any>();
     const [playing, setPlaying] = useState<boolean>(false);
+    /* Snack bar */
+    const [showMessage, setShowMessage] = React.useState<boolean>(false);
+    const [message, setMessage] = React.useState<string>("");
+
+    const hideMessage = () => setShowMessage(false);
+
+    const setAlert = (newMessage: string): void => {
+        setMessage(newMessage);
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 1500)
+    }
 
     const stopSound = () => {
         soundTrack?.unloadAsync();
@@ -92,14 +106,19 @@ const AppProvider = ({ children }: any) => {
     useEffect(() => {
         if (awakeMode) {
             activateKeepAwake();
+            setAlert('Screen awake: ON');
         } else {
             deactivateKeepAwake();
+            setAlert('Screen awake: OFF');
         }
     }, [awakeMode]);
 
     return (
         <AppContext.Provider
             value={{
+                alert: {
+                    setAlert,
+                },
                 sound: {
                     soundEnabled,
                     playing,
@@ -127,6 +146,12 @@ const AppProvider = ({ children }: any) => {
             }}
         >
             {children}
+            <Snackbar
+                visible={showMessage}
+                onDismiss={hideMessage}
+                action={{ label: 'Close' }}>
+                {message}
+            </Snackbar>
         </AppContext.Provider>
     );
 };
