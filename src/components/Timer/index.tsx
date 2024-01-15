@@ -79,11 +79,14 @@ const Timer = ({
         }
     }, [isRunning]);
 
+    React.useEffect(() => {
+        reset();
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.timerActionsContainer}>
                 <Text>Lap {currentLap}/{initialLaps} - </Text>
-                <Text>Duration: {initialDuration}</Text>
             </View>
             <CountdownCircleTimer
                 keyId={`${key}`}

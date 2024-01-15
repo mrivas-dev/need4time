@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     timeSelectorContainer: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     selectorContainer: {
         display: 'flex',

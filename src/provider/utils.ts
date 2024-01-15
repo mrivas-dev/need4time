@@ -24,7 +24,7 @@ export const INITIAL_STATE = {
         setDeveloperMode: () => { },
         developerMode: false,
         zenMode: false,
-        awakeMode: false,
+        awakeMode: true,
         setZenMode: () => { },
         setAwakeMode: () => { },
     },

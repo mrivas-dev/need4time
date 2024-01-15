@@ -11,7 +11,7 @@ export const AppContext = createContext<MainContextType>(INITIAL_STATE);
 const AppProvider = ({ children }: any) => {
     const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
     const [zenMode, setZenMode] = useState<boolean>(false);
-    const [awakeMode, setAwakeMode] = useState<boolean>(false);
+    const [awakeMode, setAwakeMode] = useState<boolean>(true);
     const [developerMode, setDeveloperMode] = useState<boolean>(false);
     const [selectedStopSound, setStopSound] = useState<string>(RACE_STOP_SOUND);
     const [selectedCountDownSound, setCountDownSound] = useState<string>(COUNTDOWN_SOUND);
@@ -112,6 +112,10 @@ const AppProvider = ({ children }: any) => {
             setAlert('Screen awake: OFF');
         }
     }, [awakeMode]);
+    
+    useEffect(() => {
+        activateKeepAwake()
+    }, []);
 
     return (
         <AppContext.Provider

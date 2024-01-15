@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
     lapsContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         marginBottom: 45,
         zIndex: 1
     },
