@@ -8,17 +8,21 @@ const TopBar = () => {
   const {
     mode: { awakeMode, setAwakeMode }
   } = React.useContext(AppContext);
+
   const navigation = useNavigation();
   const router = useRoute();
+
+  const isTimer = router?.name.includes("Timer");
+
   return (
     <Appbar.Header
-      style={styles.top}
-    >
-      {
-        navigation?.canGoBack()
-        && <Appbar.BackAction size={20} onPress={() => { navigation?.goBack(); }} />
-      }
-      <Appbar.Content titleStyle={styles.title} title={router?.name} />
+      style={
+        Object.assign(isTimer
+          ? { borderRadius: 10 }
+          : {},
+          styles.top)}>
+      <Appbar.BackAction size={20} onPress={() => { navigation?.goBack(); }} />
+      <Appbar.Content titleStyle={styles.title} title={''} />
       <Appbar.Action size={20} icon={awakeMode ? 'flashlight' : 'flashlight-off'} onPress={() => {
         setAwakeMode(!awakeMode);
       }} />

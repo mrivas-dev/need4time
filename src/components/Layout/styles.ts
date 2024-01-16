@@ -1,7 +1,18 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_BG } from "../../utils/colors";
+import { BORDER, SEPARATOR } from "../../utils/styles";
 
 export const styles = StyleSheet.create({
-    childrenContainer: {
-        marginTop: 25
+    container: {
+        flex: 1,
+    },
+    bgColor: {
+        paddingBottom: SEPARATOR,
+        backgroundColor: PRIMARY_BG,
+        borderBottomRightRadius: BORDER,
+        borderBottomLeftRadius: BORDER,
+    },
+    homeContainer: {
+        marginTop: 110,
     },
 });

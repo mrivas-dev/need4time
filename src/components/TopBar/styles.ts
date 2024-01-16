@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     top: {
         backgroundColor: PRIMARY_BG,
         position: 'relative',
-        marginTop: 55,
         display: 'flex',
         alignItems: 'center',
         alignSelf: 'stretch',

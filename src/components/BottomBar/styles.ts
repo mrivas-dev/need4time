@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
+import { SEPARATOR } from "../../utils/styles";
 
 export const styles = StyleSheet.create({
   layout: {
     position: 'relative',
     width: '100%',
-    marginTop: 55,
-    marginBottom: 55,
+    marginTop: SEPARATOR,
+    marginBottom: SEPARATOR,
     height: 95
   },
   layout1: {
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'flex-end',
     width: '100%',
-    marginTop: 55,
+    marginTop: SEPARATOR,
   },
   elements: {
     display: 'flex',

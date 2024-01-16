@@ -5,8 +5,8 @@ import { styles } from './styles';
 import Timer from '../../components/Timer';
 
 const EMOMTimer = ({ navigation, route: { params: { laps, duration } } }) => (
-    <Layout style={styles.container}>
-        <View style={{ height: '100%', width: 'auto', display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
+    <Layout>
+        <View style={styles.container}>
             <Timer initialDuration={duration} initialLaps={laps} />
         </View>
     </Layout>

@@ -1,10 +1,14 @@
 import { StyleSheet } from "react-native";
+import { SEPARATOR } from "../../utils/styles";
 
 export const styles = StyleSheet.create({
     container: {
+        height: '100%',
+        width: 'auto',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginTop: SEPARATOR
     },
     selectorContainer: {
         display: 'flex',
@@ -18,5 +22,13 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 25
+    },
+    buttonContainer: {
+        marginTop: SEPARATOR,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    goToTimerButton: {
+        width: '55%'
     },
 });

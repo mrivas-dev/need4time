@@ -1,17 +1,38 @@
 import React from 'react'
 import { ScrollView, View } from "react-native";
+import { useRoute } from '@react-navigation/native';
 import TopBar from '../TopBar';
+import Splash from '../Splash';
 import { styles } from './styles';
 
 const Layout = ({ children }: any) => {
 
-    return (
+    const router = useRoute();
+    const isHome = router?.name === 'Home';
+    const isTimer = router?.name.includes("Timer");
+
+    const content = () => (
         <ScrollView>
-            <TopBar />
-            <View style={styles.childrenContainer}>
+            <View style={!isTimer ? styles.bgColor : {}}>
                 {children}
             </View>
         </ScrollView>
+    )
+    return (
+        <View style={styles.container}>
+            {
+                isHome
+                    ? (
+                        <Splash>
+                            <View style={styles.homeContainer}>
+                                {
+                                    content()
+                                }
+                            </View>
+                        </Splash>
+                    ) : <><TopBar />{content()}</>
+            }
+        </View>
     );
 };
 

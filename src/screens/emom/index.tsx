@@ -1,23 +1,17 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Card, IconButton, Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import { styles } from './styles';
 import Layout from '../../components/Layout';
 import Laps from '../../components/Laps';
 import TimeSelector from '../../components/TimeSelector';
-import BottomBar from '../../components/BottomBar';
+import { PRIMARY_BLUE } from '../../utils/colors';
 
 const Emom = ({ navigation }: any) => {
 
     const [laps, setLaps] = React.useState<number>(0);
     const [duration, setDuration] = React.useState<number>(0);
 
-    const bottomAction = (
-        <Button mode="contained" onPress={() => navigation.navigate('EmomTimer', {
-            laps,
-            duration
-        })}> Go </Button>
-    );
     return (
         <Layout style={styles.container}>
             <View style={styles.textContainer}>
@@ -25,7 +19,20 @@ const Emom = ({ navigation }: any) => {
             </View>
             <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
             <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
-            <BottomBar bottomAction={bottomAction} />
+            <View style={styles.buttonContainer}>
+                <Button
+                    style={styles.goToTimerButton}
+                    textColor='white'
+                    buttonColor={PRIMARY_BLUE}
+                    mode="contained"
+                    onPress={() => navigation.navigate('EmomTimer', {
+                        laps,
+                        duration
+                    })}
+                >
+                    Go
+                </Button>
+            </View>
         </Layout>
     );
 }
