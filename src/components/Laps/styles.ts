@@ -1,22 +1,31 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    lapsContainer: {
+    newSelectorContainer: {
         display: 'flex',
-        flexDirection: 'column',
-        marginBottom: 45,
-        zIndex: 1
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 25
+    },
+    timeSelectorContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
     },
     labelContainer: {
         width: '50%',
         height: 50,
         justifyContent: 'center',
+        alignItems: 'center',
         paddingLeft: 15
     },
-    selectorContainer: {
+    dialogSelectorContainer: {
         display: 'flex',
         flexDirection: 'row',
-        width: '50%',
-        paddingRight: 15
+        height: 200,
+        width: '100%',
+        
     }
 });

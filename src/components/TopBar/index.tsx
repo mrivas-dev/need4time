@@ -16,13 +16,13 @@ const TopBar = () => {
     >
       {
         navigation?.canGoBack()
-        && <Appbar.BackAction onPress={() => { navigation?.goBack(); }} />
+        && <Appbar.BackAction size={20} onPress={() => { navigation?.goBack(); }} />
       }
       <Appbar.Content titleStyle={styles.title} title={router?.name} />
-      <Appbar.Action icon={awakeMode ? 'flashlight' : 'flashlight-off'} onPress={() => {
+      <Appbar.Action size={20} icon={awakeMode ? 'flashlight' : 'flashlight-off'} onPress={() => {
         setAwakeMode(!awakeMode);
       }} />
-      <Appbar.Action icon="cog" onPress={() => navigation.navigate({ name: "Settings" } as never)} />
+      <Appbar.Action size={20} icon="cog" onPress={() => navigation.navigate({ name: "Settings" } as never)} />
     </Appbar.Header>
   )
 }

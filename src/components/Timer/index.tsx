@@ -86,7 +86,7 @@ const Timer = ({
     return (
         <View style={styles.container}>
             <View style={styles.timerActionsContainer}>
-                <Text>Lap {currentLap}/{initialLaps} - </Text>
+                <Text variant="titleLarge">{currentLap}/{initialLaps}</Text>
             </View>
             <CountdownCircleTimer
                 keyId={`${key}`}

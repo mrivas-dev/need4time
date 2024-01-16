@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, IconButton } from 'react-native-paper';
+import { Button, Card, IconButton, Text } from 'react-native-paper';
 import { styles } from './styles';
 import Layout from '../../components/Layout';
 import Laps from '../../components/Laps';
@@ -13,17 +13,6 @@ const Emom = ({ navigation }: any) => {
     const [duration, setDuration] = React.useState<number>(0);
 
     const bottomAction = (
-        // <IconButton
-        //     icon="play"
-        //     style={{width: '100%', justifyContent: 'center', alignItems: 'center'}}
-        //     size={55}
-        //     onPress={
-        //         () => navigation.navigate('EmomTimer', {
-        //             laps,
-        //             duration
-        //         })
-        //     }
-        // />
         <Button mode="contained" onPress={() => navigation.navigate('EmomTimer', {
             laps,
             duration
@@ -31,10 +20,11 @@ const Emom = ({ navigation }: any) => {
     );
     return (
         <Layout style={styles.container}>
-            <View style={styles.container}>
-                <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
-                <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
+            <View style={styles.textContainer}>
+                <Text variant="headlineMedium">EMOM</Text>
             </View>
+            <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
+            <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
             <BottomBar bottomAction={bottomAction} />
         </Layout>
     );

@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         height: '100%',
     },
     numberLabel: {
-        fontSize: 150,
+        fontSize: 110,
         fontWeight: "400",
     },
     smallLabel: {
