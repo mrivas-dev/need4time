@@ -17,7 +17,7 @@ const Emom = ({ navigation }: any) => {
             <View style={styles.textContainer}>
                 <Text variant="headlineMedium">EMOM</Text>
             </View>
-            <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
+            <TimeSelector label="Every" onTimeSelect={(newDuration) => setDuration(newDuration)} />
             <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
             <View style={styles.buttonContainer}>
                 <Button

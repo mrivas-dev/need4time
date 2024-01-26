@@ -11,6 +11,7 @@ import Timer from './screens/timer';
 import { PaperProvider } from 'react-native-paper';
 import { CombinedDarkTheme } from './utils/theme';
 import EMOMTimer from './screens/emom/timer';
+import AMRAPTimer from './screens/amrap/timer';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const FitTimer = () => {
                         <Stack.Screen name="Emom" component={Emom} />
                         <Stack.Screen name="EmomTimer" component={EMOMTimer} />
                         <Stack.Screen name="Amrap" component={Amrap} />
+                        <Stack.Screen name="AmrapTimer" component={AMRAPTimer} />
                         <Stack.Screen name="ForTime" component={ForTime} />
                         <Stack.Screen name="Settings" component={Settings} />
                         <Stack.Screen name="Timer" component={Timer} />

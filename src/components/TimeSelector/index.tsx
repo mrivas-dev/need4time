@@ -7,7 +7,7 @@ import { addZerosToTime } from '../../utils/timer';
 interface LapsProps {
     onSelectLaps: any;
 }
-const TimeSelector = ({ onTimeSelect = (duration: number) => { } }) => {
+const TimeSelector = ({ label, onTimeSelect = (duration: number) => { } }) => {
     const [minutes, setMinutes] = React.useState<number>(0);
     const [seconds, setSeconds] = React.useState<number>(5);
 
@@ -28,7 +28,7 @@ const TimeSelector = ({ onTimeSelect = (duration: number) => { } }) => {
                 setSeconds={setSeconds}
                 setVisible={setVisible}
             />
-            <Text variant="titleLarge">Every</Text>
+            <Text variant="titleLarge">{label}</Text>
             <Card onPress={() => { setVisible(true); }}>
                 <Card.Content>
                     <Text variant="titleLarge">
