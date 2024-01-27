@@ -28,8 +28,14 @@ interface ModeContext {
     awakeMode: boolean;
 };
 
+interface TimerContext {
+    maxMinutes: number;
+    setMaxMinutes: (param: any) => any;
+};
+
 export interface NeedForTimeContext {
     alert: AlertContext;
     sound: SoundContext;
     mode: ModeContext;
+    timer: TimerContext;
 };

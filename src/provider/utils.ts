@@ -28,5 +28,8 @@ export const INITIAL_STATE = {
         setZenMode: () => { },
         setAwakeMode: () => { },
     },
-
+    timer: {
+        maxMinutes: 30,
+        setMaxMinutes: () => { },
+    }
 };

@@ -19,6 +19,8 @@ const AppProvider = ({ children }: any) => {
     /* Sound shit */
     const [soundTrack, setSoundTrack] = useState<any>();
     const [playing, setPlaying] = useState<boolean>(false);
+    /* Timer config */
+    const [maxMinutes, setMaxMinutes] = useState<number>(30);
     /* Snack bar */
     const [showMessage, setShowMessage] = React.useState<boolean>(false);
     const [message, setMessage] = React.useState<string>("");
@@ -112,7 +114,7 @@ const AppProvider = ({ children }: any) => {
             setAlert('Screen awake: OFF');
         }
     }, [awakeMode]);
-    
+
     useEffect(() => {
         activateKeepAwake()
     }, []);
@@ -146,6 +148,10 @@ const AppProvider = ({ children }: any) => {
                     awakeMode,
                     setZenMode,
                     setAwakeMode
+                },
+                timer: {
+                    maxMinutes,
+                    setMaxMinutes
                 }
             }}
         >
