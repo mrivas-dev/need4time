@@ -2,6 +2,7 @@ import {
     Dimensions,
     StyleSheet
 } from 'react-native';
+import { BORDER } from '../../utils/styles';
 
 export const styles = StyleSheet.create({
     content: {
@@ -16,16 +17,30 @@ export const styles = StyleSheet.create({
         backgroundColor: '#E6E6E6',
     },
     modeCardContent: {
-        display: 'flex',
-        width: '100%',
         height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: '100%',
+    },
+    modeCardCover: {
+        width: '100%',
+        backgroundColor: '#E6E6E6',
+        opacity: 0.6,
+    },
+    modeTitleWrapper: {
+        position: 'absolute',
+        height: '15%',
+        width: '122%',
+        left: 0,
+        bottom: 0,
+        display: 'flex',
+        backgroundColor: '#E6E6E6',
+        borderBottomRightRadius: BORDER,
+        borderBottomLeftRadius: BORDER
     },
     modeTitle: {
         position: 'absolute',
-        top: '45%',
+        bottom: '5%',
         left: '35%',
+        color: 'black',
+        opacity: 1
     }
 });
