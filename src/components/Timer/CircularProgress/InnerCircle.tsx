@@ -1,5 +1,12 @@
 import React from 'react';
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from 'react-native-reanimated';
+import Animated, {
+    Easing,
+    useAnimatedStyle,
+    useSharedValue,
+    withRepeat,
+    withSequence,
+    withTiming
+} from 'react-native-reanimated';
 import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, TouchableRipple } from 'react-native-paper';
@@ -21,9 +28,9 @@ const InnerCircle = ({
     isFinished,
     onPress,
 }) => {
+    const opacity = useSharedValue(0);
     const offset = useSharedValue(-750);
     const scalation = useSharedValue(1);
-
     const rotation = useSharedValue(0);
 
     const wobbleStyle = useAnimatedStyle(() => ({
@@ -38,6 +45,9 @@ const InnerCircle = ({
         transform: [{ translateX: offset.value }],
     }));
 
+    const opacityAnimation = useAnimatedStyle(() => ({
+        opacity: opacity.value
+    }), []);
 
     const { remainingTime } = useCountdown({
         isPlaying,
@@ -83,6 +93,11 @@ const InnerCircle = ({
             1,
             false
         );
+        opacity.value = withRepeat(
+            withTiming(1, { duration: 1000, easing: Easing.ease }),
+            -1,
+            true
+        );
     }, []);
 
     const renderPausedLabel = ({ remainingTime }) => {
@@ -95,7 +110,9 @@ const InnerCircle = ({
                         ? (
                             <View style={{ alignItems: 'center' }}>
                                 <Text style={styles.smallLabel}>{calculateRemainingTimeText({ remainingTime })}</Text>
-                                <AntDesign name="pause" size={100} color="white" />
+                                <Animated.View style={[opacityAnimation]}>
+                                    <AntDesign name="pause" size={100} color="white" />
+                                </Animated.View>
                             </View>
                         )
 
