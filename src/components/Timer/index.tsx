@@ -4,7 +4,6 @@ import CountdownCircleTimer from './CircularProgress/';
 import { styles } from './styles';
 import TimerActions from './TimerActions';
 import { AppContext } from '../../provider';
-import SimpleTimer from './SimpleTimer';
 import Laps from '../Laps';
 
 const Timer = ({

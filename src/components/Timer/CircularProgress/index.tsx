@@ -16,7 +16,7 @@ const StopWatch = ({
     isLandscapeMode
 }) => {
     const { sound: { soundEnabled, playCountdownSound, playStartSound } } = React.useContext(AppContext);
-    console.log('isLandscapeMode', isLandscapeMode);
+
     return (
         <CountdownCircleTimer
             size={350}

@@ -11,7 +11,7 @@ const EMOMTimer = ({ navigation, route: { params: { laps, duration } } }) => {
     return (
         <Layout>
             <View style={styles.container}>
-                <Timer initialDuration={duration} initialLaps={laps} isLandscapeMode={true}/>
+                <Timer initialDuration={duration} initialLaps={laps} isLandscapeMode={isLandscape}/>
             </View>
         </Layout>
     )
