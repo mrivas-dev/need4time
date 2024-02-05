@@ -1,14 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from 'react-native-paper';
 import CountdownCircleTimer from './CircularProgress/';
 import { styles } from './styles';
 import TimerActions from './TimerActions';
 import { AppContext } from '../../provider';
+import SimpleTimer from './SimpleTimer';
+import Laps from '../Laps';
 
 const Timer = ({
     initialDuration,
     initialLaps,
+    isLandscapeMode
 }: any) => {
     const [key, setKey] = React.useState<number>(0);
     const [isStarted, setStarted] = React.useState<boolean>(false);
@@ -50,7 +52,6 @@ const Timer = ({
         return { shouldRepeat: !isFinish };
     }
 
-
     const reset = () => {
         setKey(prevKey => prevKey + 1);
         setRunning(false);
@@ -62,13 +63,11 @@ const Timer = ({
         initTime();
     }
 
-
     React.useEffect(() => {
         if (initialDuration) {
             reset();
         }
     }, [initialDuration])
-
 
     React.useEffect(() => {
         if (!isStarted) {
@@ -85,9 +84,7 @@ const Timer = ({
 
     return (
         <View style={styles.container}>
-            <View style={styles.timerActionsContainer}>
-                <Text variant="titleLarge">Laps: {currentLap}/{initialLaps}</Text>
-            </View>
+            <Laps currentLap={currentLap} initialLaps={initialLaps} />
             <CountdownCircleTimer
                 keyId={`${key}`}
                 isFirstLap={currentLap === 1}
@@ -98,6 +95,7 @@ const Timer = ({
                 duration={isFirstTen ? 10 : totalDuration}
                 finishLap={onFinishLap}
                 setRunning={setRunning}
+                isLandscapeMode={isLandscapeMode}
             />
             <TimerActions
                 isRunning={isRunning}

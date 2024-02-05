@@ -17,13 +17,12 @@ const TimeSelectorDialog = ({ visible, hideDialog, minutes, setMinutes, seconds,
                             numberOfLines={1}
                             style={{ width: '50%' }}
                             itemStyle={{ color: white }}
-                            selectedValue={minutes}
-                            onValueChange={(itemValue) =>
-                                setMinutes(itemValue)
-                            }>
+                            selectedValue={`${minutes}`}
+                            onValueChange={(itemValue) => setMinutes(itemValue)}
+                        >
                             {
                                 Array.from(Array(101).keys()).map((item, index) => {
-                                   return <Picker.Item key={`minutes-${index}`} label={`${item}`} value={index} />
+                                    return <Picker.Item key={`minutes-${index}`} label={`${item}`} value={index} />
                                 })
                             }
                         </Picker>
@@ -31,10 +30,8 @@ const TimeSelectorDialog = ({ visible, hideDialog, minutes, setMinutes, seconds,
                             numberOfLines={1}
                             style={{ width: '50%' }}
                             itemStyle={{ color: white }}
-                            selectedValue={seconds}
-                            onValueChange={(itemValue) =>
-                                setSeconds(itemValue)
-                            }>
+                            selectedValue={`${seconds}`}
+                            onValueChange={(itemValue) => setSeconds(itemValue)}>
                             <Picker.Item label="0" value="0" />
                             <Picker.Item label="5" value="5" />
                             <Picker.Item label="15" value="15" />

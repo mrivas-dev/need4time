@@ -12,15 +12,18 @@ const StopWatch = ({
     isFirstLap,
     isFinish,
     setRunning,
-    finishLap
+    finishLap,
+    isLandscapeMode
 }) => {
     const { sound: { soundEnabled, playCountdownSound, playStartSound } } = React.useContext(AppContext);
+    console.log('isLandscapeMode', isLandscapeMode);
     return (
         <CountdownCircleTimer
             size={350}
             key={keyId}
             isPlaying={isPlaying}
             duration={duration}
+            strokeWidth={isLandscapeMode ? 0 : 10}
             strokeLinecap={"butt"}
             colors={['#004777', '#F7B801', '#A30000', '#A30000']}
             colorsTime={[10, 7, 5, 0]}
@@ -46,6 +49,7 @@ const StopWatch = ({
                     isPlaying={isPlaying}
                     isFinished={isFinish}
                     onPress={() => { setRunning(!isPlaying); }}
+                    isLandscapeMode={isLandscapeMode}
                 />)
             }
         </CountdownCircleTimer>

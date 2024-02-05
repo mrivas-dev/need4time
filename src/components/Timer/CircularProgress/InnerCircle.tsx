@@ -27,7 +27,9 @@ const InnerCircle = ({
     isPlaying,
     isFinished,
     onPress,
+    isLandscapeMode
 }) => {
+
     const opacity = useSharedValue(0);
     const offset = useSharedValue(-750);
     const scalation = useSharedValue(1);
@@ -54,6 +56,7 @@ const InnerCircle = ({
         duration,
         colors: `url(#${keyId})`,
     });
+
     const renderFinishedLabel = () => {
         return (
             <View
@@ -109,9 +112,9 @@ const InnerCircle = ({
                     isStarted
                         ? (
                             <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.smallLabel}>{calculateRemainingTimeText({ remainingTime })}</Text>
+                                <Text style={styles.smallLabel}>Remaining: {calculateRemainingTimeText({ remainingTime })}</Text>
                                 <Animated.View style={[opacityAnimation]}>
-                                    <AntDesign name="pause" size={100} color="white" />
+                                    <AntDesign name="pause" size={350} color="white" />
                                 </Animated.View>
                             </View>
                         )
@@ -119,10 +122,9 @@ const InnerCircle = ({
                         : (<Animated.View style={[{ right: 750 }, translateAnimation]}>
                             <AntDesign
                                 name="caretright"
-                                size={150}
+                                size={350}
                                 color="white"
                             />
-
                         </Animated.View>)
                 }
                 <Text style={styles.pausedLabel}>{isStarted ? 'Tap to resume' : 'Tap to start'}</Text>
@@ -134,7 +136,11 @@ const InnerCircle = ({
         <View
             style={{ alignItems: 'center' }}
         >
-            <Text style={styles.numberLabel}>GO !</Text>
+            <Text style={
+                isLandscapeMode
+                    ? styles.landscapeNumberLabel
+                    : styles.smallNumberLabel
+            }>GO !</Text>
         </View>
     )
 
@@ -148,7 +154,11 @@ const InnerCircle = ({
             <View
                 style={{ alignItems: 'center' }}
             >
-                <Text style={styles.numberLabel}>{calculateRemainingTimeText({ remainingTime })}</Text>
+                <Text style={
+                    isLandscapeMode
+                        ? styles.landscapeNumberLabel
+                        : styles.smallNumberLabel
+                }>{calculateRemainingTimeText({ remainingTime })}</Text>
                 {!isFirstTen && minutes === 0 && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
                 {!isFirstTen && seconds > 10 && <Text style={styles.smallLabel}>Tap to pause</Text>}
             </View>

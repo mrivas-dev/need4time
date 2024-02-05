@@ -1,39 +1,38 @@
 import React from 'react'
 import { View } from 'react-native';
 import { styles } from './styles';
-import { Card, Text } from 'react-native-paper';
-import LapsSelectorDialog from './SelectorDialog';
+import { Text } from 'react-native-paper';
+
 interface LapsProps {
-    onSelectLaps: any;
+    currentLap: number;
+    initialLaps: number;
 }
 
-const Laps = ({ onSelectLaps = (laps: number) => {} }) => {
-    const [laps, setLaps] = React.useState<number>(1);
+const Laps = ({ currentLap, initialLaps }: LapsProps) => {
 
-    const [visible, setVisible] = React.useState(false);
-    const hideDialog = () => setVisible(false);
+    const [isLastLap, setIsLastLap] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        if (laps) {
-            onSelectLaps(laps);
-        }
-    }, [laps])
+        setIsLastLap(currentLap === initialLaps);
+    }, [currentLap, initialLaps]);
+
+    const renderLastLap = () => {
+        return (
+            <View style={styles.lapsContainer}>
+                <Text variant="titleLarge">Last Lap</Text>
+            </View>
+        );
+    };
+
     return (
-        <View style={styles.newSelectorContainer}>
-            <LapsSelectorDialog
-                visible={visible}
-                laps={laps}
-                setLaps={setLaps}
-                hideDialog={hideDialog}
-                setVisible={setVisible}
-            />
-            <Text variant="titleLarge">For</Text>
-            <Card onPress={() => { setVisible(true); }}>
-                <Card.Content>
-                    <Text variant="titleLarge">{laps}x times</Text>
-                </Card.Content>
-            </Card>
+        <View style={styles.lapsContainer}>
+            {
+                isLastLap
+                    ? renderLastLap()
+                    : <Text variant="titleLarge">Laps: {currentLap}/{initialLaps}</Text>
+            }
         </View>
+
     );
 };
 

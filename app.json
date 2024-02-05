@@ -3,7 +3,6 @@
     "name": "need4time",
     "slug": "need4time",
     "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./src/assets/app/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {

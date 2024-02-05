@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import Timer from '../../components/Timer';
-import Laps from '../../components/Laps';
+import Laps from '../../components/LapsSelector';
 import TimeSelector from '../../components/TimeSelector';
 import styles from './styles';
 import { View } from 'react-native';

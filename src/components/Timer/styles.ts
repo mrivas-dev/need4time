@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         width: '75%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingTop: 15,
+        paddingTop: 25,
         paddingBottom: 55
     }
 });

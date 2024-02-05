@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { styles } from './styles';
 import Layout from '../../components/Layout';
-import Laps from '../../components/Laps';
+import Laps from '../../components/LapsSelector';
 import TimeSelector from '../../components/TimeSelector';
 import { PRIMARY_BLUE } from '../../utils/colors';
 

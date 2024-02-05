@@ -31,9 +31,19 @@ const Modes = () => {
                 </TouchableRipple>
             </Card>
             <Card style={styles.modeCard} mode="contained" contentStyle={styles.modeCardContent}>
+                <TouchableRipple onPress={() => navigation.navigate({ name: "ForTime" } as never)} >
+                    <Card.Content style={styles.modeCardContent}>
+                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/TiaClairToomeyWBG.png')} />
+                        <View style={styles.modeTitleWrapper}>
+                            <Text style={styles.modeTitle} variant="titleLarge">ForTime</Text>
+                        </View>
+                    </Card.Content>
+                </TouchableRipple>
+            </Card>
+            <Card style={styles.modeCard} mode="contained" contentStyle={styles.modeCardContent}>
                 <TouchableRipple onPress={() => navigation.navigate({ name: "Settings" } as never)} >
                     <Card.Content style={styles.modeCardContent}>
-                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/RichFroningWBG.png')} />
+                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/MattFraserWBG.png')} />
                         <View style={styles.modeTitleWrapper}>
                             <Text style={styles.modeTitle} variant="titleLarge">Settings</Text>
                         </View>

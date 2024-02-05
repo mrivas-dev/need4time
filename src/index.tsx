@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/home';
 import Settings from './screens/settings';
-import Splash from './components/Splash';
 import Emom from './screens/emom';
 import Amrap from './screens/amrap';
 import ForTime from './screens/forTime';
