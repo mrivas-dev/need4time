@@ -13,7 +13,7 @@ const Emom = ({ navigation }: any) => {
     const [duration, setDuration] = React.useState<number>(0);
 
     return (
-        <Layout style={styles.container}>
+        <Layout>
             <View style={styles.textContainer}>
                 <Text variant="headlineMedium">EMOM</Text>
             </View>
@@ -24,13 +24,13 @@ const Emom = ({ navigation }: any) => {
                     style={styles.goToTimerButton}
                     textColor='white'
                     buttonColor={PRIMARY_BLUE}
-                    mode="contained"
+                    mode="contained-tonal"
                     onPress={() => navigation.navigate('EmomTimer', {
                         laps,
                         duration
                     })}
                 >
-                    Go
+                    Start
                 </Button>
             </View>
         </Layout>

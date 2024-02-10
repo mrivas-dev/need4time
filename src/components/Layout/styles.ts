@@ -12,6 +12,9 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: BORDER,
         borderBottomLeftRadius: BORDER,
     },
+    homeLandscapeContainer: {
+        marginTop: 60,
+    },
     homeContainer: {
         marginTop: 110,
     },

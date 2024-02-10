@@ -4,31 +4,30 @@ import {
 } from 'react-native';
 import { BORDER } from '../../utils/styles';
 
+const isLandscape = Dimensions.get('window').width > Dimensions.get('window').height;
+
 export const styles = StyleSheet.create({
     content: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center'
     },
+
     modeCard: {
-        height: Dimensions.get('window').width / 2,
-        width: '45%',
-        margin: 8,
+        width: Dimensions.get('window').width / 2.2,
+        margin: 5,
+        height: (Dimensions.get('window').height / (isLandscape ? 2 : 3)) - 55,
         backgroundColor: '#E6E6E6',
-    },
-    modeCardContent: {
-        height: '100%',
-        width: '100%',
+        overflow: 'hidden',
     },
     modeCardCover: {
-        width: '100%',
-        backgroundColor: '#E6E6E6',
-        opacity: 0.6,
+        height: 250,
+        opacity: 0.7,
     },
+
     modeTitleWrapper: {
         position: 'absolute',
-        height: '15%',
-        width: '122%',
+        
         left: 0,
         bottom: 0,
         display: 'flex',
@@ -38,7 +37,7 @@ export const styles = StyleSheet.create({
     },
     modeTitle: {
         position: 'absolute',
-        bottom: '5%',
+        bottom: '55%',
         left: '35%',
         color: 'black',
         opacity: 1

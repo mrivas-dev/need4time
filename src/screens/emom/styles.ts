@@ -1,8 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { SEPARATOR } from "../../utils/styles";
+
+const isLandscape = Dimensions.get('window').width > Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     container: {
+        maxHeight: Dimensions.get('window').height - 5,
         height: '100%',
         width: 'auto',
         display: 'flex',
@@ -15,18 +18,18 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginBottom: 25
     },
     textContainer: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 25
+        marginTop: isLandscape ? 5 : 10,
+        marginBottom: isLandscape ? 5 : 20
     },
     buttonContainer: {
-        marginTop: SEPARATOR,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: isLandscape ? 0 : SEPARATOR
     },
     goToTimerButton: {
         width: '55%'
