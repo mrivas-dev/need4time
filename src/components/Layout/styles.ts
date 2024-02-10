@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { PRIMARY_BG } from "../../utils/colors";
 import { BORDER, SEPARATOR } from "../../utils/styles";
 
@@ -12,10 +12,8 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius: BORDER,
         borderBottomLeftRadius: BORDER,
     },
-    homeLandscapeContainer: {
-        marginTop: 60,
-    },
     homeContainer: {
-        marginTop: 110,
+        paddingTop: '2%',
+        paddingBottom: '2%',
     },
 });

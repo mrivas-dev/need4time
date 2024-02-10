@@ -4,16 +4,12 @@ import { useRoute } from '@react-navigation/native';
 import TopBar from '../TopBar';
 import Splash from '../Splash';
 import { styles } from './styles';
-import { useOrientation } from '../../hooks/useOrientation';
 
 const Layout = ({ children }: any) => {
 
     const router = useRoute();
     const isHome = router?.name === 'Home';
     const isTimer = router?.name.includes("Timer");
-
-    const orientation = useOrientation();
-    const isLandscape = orientation === 'landscape';
 
     const content = () => (
         <ScrollView>
@@ -28,7 +24,7 @@ const Layout = ({ children }: any) => {
                 isHome
                     ? (
                         <Splash>
-                            <View style={isLandscape ? styles.homeLandscapeContainer : styles.homeContainer}>
+                            <View style={styles.homeContainer}>
                                 {
                                     content()
                                 }

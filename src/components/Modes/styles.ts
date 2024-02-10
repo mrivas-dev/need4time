@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        marginTop: 15,
+        paddingTop: '5%',
         maxHeight: isLandscape ? Dimensions.get('window').height - 5 : '100%',
     },
 
@@ -19,18 +19,18 @@ export const styles = StyleSheet.create({
         width: Dimensions.get('window').width / 2.5,
         marginVertical: 5,
         marginHorizontal: 10,
-        height: (Dimensions.get('window').height / (isLandscape ? 2 : 3)) - 55,
+        height: (Dimensions.get('window').height / (isLandscape ? 2 : 3)) - 25,
+        maxHeight: 250,
         backgroundColor: '#E6E6E6',
         overflow: 'hidden',
     },
     modeCardCover: {
-        height: 250,
+        height: 350,
         opacity: 0.7,
     },
 
     modeTitleWrapper: {
         position: 'absolute',
-        
         left: 0,
         bottom: 0,
         display: 'flex',
