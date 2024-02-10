@@ -10,12 +10,15 @@ export const styles = StyleSheet.create({
     content: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 15,
+        maxHeight: isLandscape ? Dimensions.get('window').height - 5 : '100%',
     },
 
     modeCard: {
-        width: Dimensions.get('window').width / 2.2,
-        margin: 5,
+        width: Dimensions.get('window').width / 2.5,
+        marginVertical: 5,
+        marginHorizontal: 10,
         height: (Dimensions.get('window').height / (isLandscape ? 2 : 3)) - 55,
         backgroundColor: '#E6E6E6',
         overflow: 'hidden',

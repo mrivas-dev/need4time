@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         height: '100%',
     },
     landscapeNumberLabel: {
-        fontSize: 250,
+        fontSize: 150,
         fontWeight: "400",
     },
     smallNumberLabel: {

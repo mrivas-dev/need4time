@@ -114,7 +114,7 @@ const InnerCircle = ({
                             <View style={{ alignItems: 'center' }}>
                                 <Text style={styles.smallLabel}>Remaining: {calculateRemainingTimeText({ remainingTime })}</Text>
                                 <Animated.View style={[opacityAnimation]}>
-                                    <AntDesign name="pause" size={isLandscapeMode ? 350 : 150} color="white" />
+                                    <AntDesign name="pause" size={isLandscapeMode ? 150 : 150} color="white" />
                                 </Animated.View>
                             </View>
                         )
@@ -122,7 +122,7 @@ const InnerCircle = ({
                         : (<Animated.View style={[{ right: 750 }, translateAnimation]}>
                             <AntDesign
                                 name="caretright"
-                                size={isLandscapeMode ? 350 : 150}
+                                size={isLandscapeMode ? 150 : 150}
                                 color="white"
                             />
                         </Animated.View>)
