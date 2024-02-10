@@ -1,6 +1,6 @@
 import React from 'react';
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-import InnerCircle from "./InnerCircle";
+import InnerCircle from "../InnerCircle";
 import { AppContext } from '../../../provider/index';
 
 const StopWatch = ({

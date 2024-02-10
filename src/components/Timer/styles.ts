@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const isLandscape = Dimensions.get('window').width > Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     container: {
@@ -9,10 +11,14 @@ export const styles = StyleSheet.create({
     },
     timerActionsContainer: {
         display: 'flex',
-        width: '75%',
+        
         flexDirection: 'row',
         justifyContent: 'space-around',
         paddingTop: 25,
         paddingBottom: 55
-    }
+    },
+    numberLabel: {
+        fontSize: isLandscape ? 150 : 110,
+        fontWeight: "400",
+    },
 });

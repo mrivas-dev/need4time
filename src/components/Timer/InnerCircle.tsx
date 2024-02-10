@@ -11,8 +11,9 @@ import { View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, TouchableRipple } from 'react-native-paper';
 import { useCountdown } from 'react-native-countdown-circle-timer';
-import { calculateRemainingTimeText } from '../../../utils/timer';
-import { styles } from './styles';
+import { calculateRemainingTimeText } from '../../utils/timer';
+import { styles } from './CircularProgress/styles';
+import RunningLabel from './RunningLabel';
 
 const ANGLE = 10;
 const TIME = 100;
@@ -132,40 +133,49 @@ const InnerCircle = ({
         )
     }
 
-    const renderGo = () => (
-        <View
-            style={{ alignItems: 'center' }}
-        >
-            <Text style={
-                isLandscapeMode
-                    ? styles.landscapeNumberLabel
-                    : styles.smallNumberLabel
-            }>GO !</Text>
-        </View>
-    )
+    // const renderGo = () => (
+    //     <View
+    //         style={{ alignItems: 'center' }}
+    //     >
+    //         <Text style={
+    //             isLandscapeMode
+    //                 ? styles.landscapeNumberLabel
+    //                 : styles.smallNumberLabel
+    //         }>GO !</Text>
+    //     </View>
+    // )
 
-    const renderRunningLabel = ({ remainingTime }): JSX.Element => {
-        const minutes = Math.floor(remainingTime / 60);
-        const seconds = remainingTime % 60;
-        if (!isFirstTen && isFirstLap && remainingTime === duration) {
-            return renderGo();
-        }
-        return (
-            <View
-                style={{ alignItems: 'center' }}
-            >
-                <Text style={
-                    isLandscapeMode
-                        ? styles.landscapeNumberLabel
-                        : styles.smallNumberLabel
-                }>{calculateRemainingTimeText({ remainingTime })}</Text>
-                {!isFirstTen && minutes === 0 && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
-                {!isFirstTen && seconds > 10 && <Text style={styles.smallLabel}>Tap to pause</Text>}
-            </View>
-        )
-    }
+    // const renderRunningLabel = ({ remainingTime }): JSX.Element => {
+    //     const minutes = Math.floor(remainingTime / 60);
+    //     const seconds = remainingTime % 60;
+    //     if (!isFirstTen && isFirstLap && remainingTime === duration) {
+    //         return renderGo();
+    //     }
+    //     return (
+    //         <View
+    //             style={{ alignItems: 'center' }}
+    //         >
+    //             <Text style={
+    //                 isLandscapeMode
+    //                     ? styles.landscapeNumberLabel
+    //                     : styles.smallNumberLabel
+    //             }>{calculateRemainingTimeText({ remainingTime })}</Text>
+    //             {!isFirstTen && minutes === 0 && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
+    //             {!isFirstTen && seconds > 10 && <Text style={styles.smallLabel}>Tap to pause</Text>}
+    //         </View>
+    //     )
+    // }
 
-    const runningLabel = ({ remainingTime, isPlaying }) => isPlaying ? renderRunningLabel({ remainingTime }) : renderPausedLabel({ remainingTime })
+    const runningLabel = ({ remainingTime, isPlaying }) =>
+        isPlaying
+            ? <RunningLabel
+                remainingTime={remainingTime}
+                isFirstTen={isFirstTen}
+                isFirstLap={isFirstLap}
+                duration={duration}
+            />
+            : renderPausedLabel({ remainingTime })
+
     const handlePress = () => {
         rotation.value = withSequence(
             // deviate left to start from -ANGLE
@@ -185,7 +195,7 @@ const InnerCircle = ({
     };
     return (
         <TouchableRipple
-            style={{ alignItems: 'center' }}
+            style={{ width: '100%', alignItems: 'center' }}
             onPress={
                 !isFinished
                 && onPress
