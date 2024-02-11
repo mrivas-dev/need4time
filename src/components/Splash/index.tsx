@@ -1,17 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Animated, Dimensions, View } from "react-native";
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Logo from "../../assets/img/transparent.png";
-import { styles } from './styles';
+import { appWrapperStyles, styles } from './styles';
+import { useOrientation } from '../../hooks/useOrientation';
 
 const Splash = ({ children }: any) => {
-    
-    const navigation = useNavigation();
-    const router = useRoute();
 
-    const isHome = router?.name === 'Home';
+    const isLandscape = useOrientation() === 'landscape';
 
     const edges = useSafeAreaInsets();
     const startAnimation = React.useRef(new Animated.Value(0)).current;
@@ -32,19 +29,18 @@ const Splash = ({ children }: any) => {
     const contentTransition = React.useRef(new Animated.Value(Dimensions.get('window').height)).current;
     const animation_contentTransition = Animated.timing(contentTransition, { toValue: 0, useNativeDriver: true });
 
+    const parallelAnimation = Animated.parallel([
+        animation_startAnimation,
+        animation_scaleLogo,
+        animation_scaleTitle,
+        animation_moveLogo,
+        animation_moveTitle,
+        animation_contentTransition
+    ])
+
     React.useEffect(() => {
-        setTimeout(() => {
-            Animated.parallel([
-                animation_startAnimation,
-                animation_scaleLogo,
-                animation_scaleTitle,
-                animation_moveLogo,
-                animation_moveTitle,
-                animation_contentTransition
-            ])
-                .start();
-        }, 500);
-    }, []);
+        setTimeout(() => { parallelAnimation.start(); }, 500);
+    }, [edges]);
 
     return (
         <View style={styles.mainWrapper}>
@@ -81,7 +77,7 @@ const Splash = ({ children }: any) => {
                     transform: [
                         { translateY: contentTransition }
                     ]
-                }, styles.appWrapper)
+                }, appWrapperStyles({ isLandscape }))
             }
             >
                 <StatusBar style="auto" />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
-import { TouchableRipple, Card, Text } from 'react-native-paper';
+import { TouchableRipple, Card } from 'react-native-paper';
 import { styles } from './styles';
 
 const Modes = () => {

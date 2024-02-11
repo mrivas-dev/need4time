@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         paddingTop: '5%',
-        maxHeight: isLandscape ? Dimensions.get('window').height - 5 : '100%',
+        maxHeight: Dimensions.get('window').height - 5,
     },
 
     modeCard: {
