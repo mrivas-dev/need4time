@@ -1,5 +1,5 @@
 import React from 'react';
-import Animated, {
+import {
     Easing,
     useAnimatedStyle,
     useSharedValue,
@@ -7,13 +7,13 @@ import Animated, {
     withSequence,
     withTiming
 } from 'react-native-reanimated';
-import { View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { Text, TouchableRipple } from 'react-native-paper';
+import { TouchableRipple } from 'react-native-paper';
 import { useCountdown } from 'react-native-countdown-circle-timer';
-import { calculateRemainingTimeText } from '../../utils/timer';
-import { styles } from './CircularProgress/styles';
+import { styles } from './styles';
 import RunningLabel from './RunningLabel';
+import PausedLabel from './PausedLabel';
+import FinishedLabel from './FinishedLabel';
+import MetaLabel from './MetaLabel';
 
 const ANGLE = 10;
 const TIME = 100;
@@ -25,10 +25,15 @@ const InnerCircle = ({
     isFirstTen,
     duration,
     isStarted,
-    isPlaying,
+    isRunning,
     isFinished,
     onPress,
-    isLandscapeMode
+    isLandscapeMode,
+    setRunning,
+    isFinish,
+    onStop,
+    currentLap,
+    initialLaps
 }) => {
 
     const opacity = useSharedValue(0);
@@ -53,35 +58,10 @@ const InnerCircle = ({
     }), []);
 
     const { remainingTime } = useCountdown({
-        isPlaying,
+        isPlaying: isRunning,
         duration,
         colors: `url(#${keyId})`,
     });
-
-    const renderFinishedLabel = () => {
-        return (
-            <View
-                style={{ alignItems: 'center' }}
-            >
-                <Text>Well done!</Text>
-                <Animated.View style={[{ scaleX: -.3 }, growAnimation]}>
-                    <Text
-                        style={styles.finishedLabel}>You are a beast!
-                    </Text>
-                </Animated.View>
-                <Animated.View style={[wobbleStyle]}>
-                    <TouchableRipple
-                        style={{ alignItems: 'center' }}
-                        onPress={() => handlePress()}
-                    >
-                        <Text style={styles.finishedLabel}>
-                            🔥
-                        </Text>
-                    </TouchableRipple>
-                </Animated.View>
-            </View>
-        )
-    }
 
     React.useEffect(() => {
         offset.value = withRepeat(
@@ -104,77 +84,22 @@ const InnerCircle = ({
         );
     }, []);
 
-    const renderPausedLabel = ({ remainingTime }) => {
-        return (
-            <View
-                style={{ alignItems: 'center' }}
-            >
-                {
-                    isStarted
-                        ? (
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.smallLabel}>Remaining: {calculateRemainingTimeText({ remainingTime })}</Text>
-                                <Animated.View style={[opacityAnimation]}>
-                                    <AntDesign name="pause" size={isLandscapeMode ? 150 : 150} color="white" />
-                                </Animated.View>
-                            </View>
-                        )
-
-                        : (<Animated.View style={[{ right: 750 }, translateAnimation]}>
-                            <AntDesign
-                                name="caretright"
-                                size={isLandscapeMode ? 150 : 150}
-                                color="white"
-                            />
-                        </Animated.View>)
-                }
-                <Text style={styles.pausedLabel}>{isStarted ? 'Tap to resume' : 'Tap to start'}</Text>
-            </View>
-        )
-    }
-
-    // const renderGo = () => (
-    //     <View
-    //         style={{ alignItems: 'center' }}
-    //     >
-    //         <Text style={
-    //             isLandscapeMode
-    //                 ? styles.landscapeNumberLabel
-    //                 : styles.smallNumberLabel
-    //         }>GO !</Text>
-    //     </View>
-    // )
-
-    // const renderRunningLabel = ({ remainingTime }): JSX.Element => {
-    //     const minutes = Math.floor(remainingTime / 60);
-    //     const seconds = remainingTime % 60;
-    //     if (!isFirstTen && isFirstLap && remainingTime === duration) {
-    //         return renderGo();
-    //     }
-    //     return (
-    //         <View
-    //             style={{ alignItems: 'center' }}
-    //         >
-    //             <Text style={
-    //                 isLandscapeMode
-    //                     ? styles.landscapeNumberLabel
-    //                     : styles.smallNumberLabel
-    //             }>{calculateRemainingTimeText({ remainingTime })}</Text>
-    //             {!isFirstTen && minutes === 0 && seconds < 10 && <Text style={styles.smallLabel}>Hurry up!</Text>}
-    //             {!isFirstTen && seconds > 10 && <Text style={styles.smallLabel}>Tap to pause</Text>}
-    //         </View>
-    //     )
-    // }
-
-    const runningLabel = ({ remainingTime, isPlaying }) =>
-        isPlaying
+    const runningLabel = ({ remainingTime, isRunning }) =>
+        isRunning
             ? <RunningLabel
                 remainingTime={remainingTime}
                 isFirstTen={isFirstTen}
                 isFirstLap={isFirstLap}
                 duration={duration}
             />
-            : renderPausedLabel({ remainingTime })
+            : <PausedLabel
+                remainingTime={remainingTime}
+                isStarted={isStarted}
+                opacityAnimation={opacityAnimation}
+                isLandscapeMode={isLandscapeMode}
+                translateAnimation={translateAnimation}
+
+            />;
 
     const handlePress = () => {
         rotation.value = withSequence(
@@ -195,14 +120,33 @@ const InnerCircle = ({
     };
     return (
         <TouchableRipple
-            style={{ width: '100%', alignItems: 'center' }}
+            style={styles.touchableRippleContainer}
             onPress={
                 !isFinished
                 && onPress
             }
             rippleColor="rgba(0, 0, 0, .1)">
 
-            {isFinished ? renderFinishedLabel() : runningLabel({ remainingTime, isPlaying })}
+            {isFinished ?
+                <FinishedLabel
+                    handlePress={handlePress}
+                    growAnimation={growAnimation}
+                    wobbleStyle={wobbleStyle}
+                />
+                : <MetaLabel
+                    currentLap={currentLap}
+                    initialLaps={initialLaps}
+                    isStarted={isStarted}
+                    isRunning={isRunning}
+                    remainingTime={remainingTime}
+                    opacityAnimation={opacityAnimation}
+                    isLandscapeMode={isLandscapeMode}
+                    translateAnimation={translateAnimation}
+                    setRunning={setRunning}
+                    isFinish={isFinish}
+                    onStop={onStop}
+                />
+            }
 
         </TouchableRipple>
     )

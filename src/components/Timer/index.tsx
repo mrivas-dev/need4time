@@ -1,10 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import CountdownCircleTimer from './CircularProgress/';
-import { styles } from './styles';
+import { containerStyles, styles } from './styles';
 import TimerActions from './TimerActions';
 import { AppContext } from '../../provider';
 import Laps from '../Laps';
+import { Text } from 'react-native-paper';
 
 const Timer = ({
     initialDuration,
@@ -53,10 +54,10 @@ const Timer = ({
 
     const reset = () => {
         setKey(prevKey => prevKey + 1);
+        setFinish(false);
         setRunning(false);
         setStarted(false);
         setFirstTen(true);
-        setFinish(false);
         setLaps(initialLaps || 1);
         stopSound();
         initTime();
@@ -82,8 +83,31 @@ const Timer = ({
     }, []);
 
     return (
-        <View style={styles.container}>
-            <Laps currentLap={currentLap} initialLaps={initialLaps} />
+        <View style={containerStyles(isLandscapeMode)}>
+            {!isLandscapeMode && <Laps currentLap={currentLap} initialLaps={initialLaps} />}
+            <CountdownCircleTimer
+                keyId={`${key}`}
+                isFirstLap={currentLap === 1}
+                isRunning={isRunning}
+                isStarted={isStarted}
+                isFinish={isFinish}
+                isFirstTen={isFirstTen}
+                duration={isFirstTen ? 10 : totalDuration}
+                finishLap={onFinishLap}
+                setRunning={setRunning}
+                isLandscapeMode={isLandscapeMode}
+                currentLap={currentLap}
+                initialLaps={initialLaps}
+                onStop={onStop}
+            />
+            {!isLandscapeMode && <TimerActions
+                isRunning={isRunning}
+                isStarted={isStarted}
+                setRunning={setRunning}
+                isFinish={isFinish}
+                onStop={onStop}
+            />}
+            {/* <Laps currentLap={currentLap} initialLaps={initialLaps} />
             <CountdownCircleTimer
                 keyId={`${key}`}
                 isFirstLap={currentLap === 1}
@@ -96,13 +120,7 @@ const Timer = ({
                 setRunning={setRunning}
                 isLandscapeMode={isLandscapeMode}
             />
-            <TimerActions
-                isRunning={isRunning}
-                isStarted={isStarted}
-                setRunning={setRunning}
-                isFinish={isFinish}
-                onStop={onStop}
-            />
+             */}
         </View>
     )
 }

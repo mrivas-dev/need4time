@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { styles } from './styles';
+import { numberLabelStyles, styles } from './styles';
 import { Text } from 'react-native-paper';
 import { calculateRemainingTimeText } from '../../utils/timer';
 
@@ -8,28 +8,24 @@ const RunningLabel = ({
     remainingTime,
     isFirstTen,
     isFirstLap,
-    duration
+    duration,
+    isLandscapeMode
 }: any) => {
-
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
-
-    const renderGo = () => (
-        <View
-            style={{ alignItems: 'center' }}
-        >
-            <Text style={styles.numberLabel}>GO !</Text>
-        </View>
-    );
 
     return (
         (!isFirstTen && isFirstLap && remainingTime === duration)
-            ? renderGo()
+            ? (
+                <View
+                    style={styles.center}
+                >
+                    <Text style={numberLabelStyles(isLandscapeMode)}>GO !</Text>
+                </View>
+            )
             : (
                 <View
-                    style={{ alignItems: 'center' }}
+                    style={styles.center}
                 >
-                    <Text style={styles.numberLabel}>{calculateRemainingTimeText({ remainingTime })}</Text>
+                    <Text style={numberLabelStyles(isLandscapeMode)}>{calculateRemainingTimeText({ remainingTime })}</Text>
                 </View>
             )
     );

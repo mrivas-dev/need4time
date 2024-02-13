@@ -19,7 +19,7 @@ const Laps = ({ currentLap, initialLaps }: LapsProps) => {
     const renderLastLap = () => {
         return (
             <View style={styles.lapsContainer}>
-                <Text variant="titleLarge">Last Lap</Text>
+                <Text style={styles.lapLabel}>Last Lap</Text>
             </View>
         );
     };
@@ -29,7 +29,7 @@ const Laps = ({ currentLap, initialLaps }: LapsProps) => {
             {
                 isLastLap
                     ? renderLastLap()
-                    : <Text variant="titleLarge">Laps: {currentLap}/{initialLaps}</Text>
+                    : <Text style={styles.lapLabel}>Laps: {currentLap}/{initialLaps}</Text>
             }
         </View>
 
