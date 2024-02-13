@@ -26,7 +26,7 @@ const MetaLabel = ({
         <Animated.View style={[{ right: 750 }, translateAnimation]}>
             <AntDesign
                 name="caretright"
-                size={isLandscapeMode ? 150 : 150}
+                size={150}
                 color="white"
             />
             <Text style={styles.pausedLabel}>{isStarted ? 'Tap to resume' : 'Tap to start'}</Text>
