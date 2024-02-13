@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     logoWrapper: {
         width: 100,
         height: 100,
-        marginBottom: 20
+        marginBottom: 15
     },
     topBarTitleWrapper: {
         fontSize: 25,

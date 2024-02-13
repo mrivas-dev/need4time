@@ -4,7 +4,7 @@ import { BORDER, SEPARATOR } from "../../utils/styles";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     bgColor: {
         paddingBottom: SEPARATOR,
@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
         borderBottomLeftRadius: BORDER,
     },
     homeContainer: {
-        paddingTop: '2%',
         paddingBottom: '2%',
     },
 });

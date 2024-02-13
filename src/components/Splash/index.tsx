@@ -12,7 +12,7 @@ const Splash = ({ children }: any) => {
 
     const edges = useSafeAreaInsets();
     const startAnimation = React.useRef(new Animated.Value(0)).current;
-    const animation_startAnimation = Animated.timing(startAnimation, { toValue: -Dimensions.get('window').height + (edges.top + 65), useNativeDriver: true });
+    const animation_startAnimation = Animated.timing(startAnimation, { toValue: -Dimensions.get('window').height + (edges.top + 75), useNativeDriver: true });
 
     const scaleLogo = React.useRef(new Animated.Value(1)).current;
     const animation_scaleLogo = Animated.timing(scaleLogo, { toValue: 0.5, useNativeDriver: true });
