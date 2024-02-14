@@ -27,6 +27,8 @@ export const INITIAL_STATE = {
         awakeMode: true,
         setZenMode: () => { },
         setAwakeMode: () => { },
+        setLandscapeMode: () => { },
+        landscapeMode: false
     },
     timer: {
         maxMinutes: 30,

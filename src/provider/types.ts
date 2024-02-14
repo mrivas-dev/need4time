@@ -26,6 +26,8 @@ interface ModeContext {
     zenMode: boolean;
     setAwakeMode: (param: any) => any;
     awakeMode: boolean;
+    setLandscapeMode: (param: any) => any;
+    landscapeMode: boolean;
 };
 
 interface TimerContext {

@@ -6,7 +6,7 @@ import { AppContext } from '../../provider';
 
 const TopBar = () => {
   const {
-    mode: { awakeMode, setAwakeMode }
+    mode: { awakeMode, setAwakeMode, landscapeMode, setLandscapeMode }
   } = React.useContext(AppContext);
 
   const navigation = useNavigation();
@@ -23,6 +23,9 @@ const TopBar = () => {
           styles.top)}>
       <Appbar.BackAction size={20} onPress={() => { navigation?.goBack(); }} />
       <Appbar.Content titleStyle={styles.title} title={''} />
+      <Appbar.Action size={20} icon={landscapeMode ? 'crop-landscape' : 'cellphone'} onPress={() => {
+        setLandscapeMode(!landscapeMode);
+      }} />
       <Appbar.Action size={20} icon={awakeMode ? 'flashlight' : 'flashlight-off'} onPress={() => {
         setAwakeMode(!awakeMode);
       }} />

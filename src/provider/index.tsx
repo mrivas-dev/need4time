@@ -16,7 +16,8 @@ const AppProvider = ({ children }: any) => {
     const [selectedStopSound, setStopSound] = useState<string>(RACE_STOP_SOUND);
     const [selectedCountDownSound, setCountDownSound] = useState<string>(COUNTDOWN_SOUND);
     const [selectedStartSound, setStartSound] = useState<string>(RACE_START_SOUND);
-    /* Sound shit */
+    const [landscapeMode, setLandscapeMode] = useState<boolean>(false);
+    /* Sound config */
     const [soundTrack, setSoundTrack] = useState<any>();
     const [playing, setPlaying] = useState<boolean>(false);
     /* Timer config */
@@ -147,7 +148,9 @@ const AppProvider = ({ children }: any) => {
                     zenMode,
                     awakeMode,
                     setZenMode,
-                    setAwakeMode
+                    setAwakeMode,
+                    landscapeMode,
+                    setLandscapeMode
                 },
                 timer: {
                     maxMinutes,
