@@ -4,7 +4,15 @@ import {
 } from 'react-native';
 import { BORDER } from '../../utils/styles';
 
-const isLandscape = Dimensions.get('window').width > Dimensions.get('window').height;
+export const modeCardStyles = (isLandscapeMode: boolean): any => ({
+    width: Dimensions.get('window').width / 2.5,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    height: (Dimensions.get('window').height / (isLandscapeMode ? 2 : 3)) - 25,
+    maxHeight: 250,
+    backgroundColor: '#E6E6E6',
+    overflow: 'hidden',
+});
 
 export const styles = StyleSheet.create({
     content: {
@@ -15,15 +23,6 @@ export const styles = StyleSheet.create({
         maxHeight: Dimensions.get('window').height - 5,
     },
 
-    modeCard: {
-        width: Dimensions.get('window').width / 2.5,
-        marginVertical: 5,
-        marginHorizontal: 10,
-        height: (Dimensions.get('window').height / (isLandscape ? 2 : 3)) - 25,
-        maxHeight: 250,
-        backgroundColor: '#E6E6E6',
-        overflow: 'hidden',
-    },
     modeCardCover: {
         height: 350,
         opacity: 0.7,

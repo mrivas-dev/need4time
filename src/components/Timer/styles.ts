@@ -1,10 +1,8 @@
-import { Dimensions, StyleSheet } from "react-native";
-
-const isLandscape = Dimensions.get('window').width > Dimensions.get('window').height;
+import { StyleSheet } from "react-native";
 
 export const containerStyles = (isLandscapeMode: boolean): any => ({
     flexDirection: isLandscapeMode ? 'row' : 'column',
-    marginTop: isLandscape ? -55 : 0,
+    marginTop: isLandscapeMode ? -55 : 0,
     alignContent: 'flex-start'
 });
 

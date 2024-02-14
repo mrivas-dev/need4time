@@ -10,8 +10,6 @@ import {
 import { TouchableRipple } from 'react-native-paper';
 import { useCountdown } from 'react-native-countdown-circle-timer';
 import { styles } from './styles';
-import RunningLabel from './RunningLabel';
-import PausedLabel from './PausedLabel';
 import FinishedLabel from './FinishedLabel';
 import MetaLabel from './MetaLabel';
 
@@ -21,8 +19,6 @@ const EASING = Easing.elastic(1.5);
 
 const InnerCircle = ({
     keyId,
-    isFirstLap,
-    isFirstTen,
     duration,
     isStarted,
     isRunning,
@@ -83,23 +79,6 @@ const InnerCircle = ({
             true
         );
     }, []);
-
-    const runningLabel = ({ remainingTime, isRunning }) =>
-        isRunning
-            ? <RunningLabel
-                remainingTime={remainingTime}
-                isFirstTen={isFirstTen}
-                isFirstLap={isFirstLap}
-                duration={duration}
-            />
-            : <PausedLabel
-                remainingTime={remainingTime}
-                isStarted={isStarted}
-                opacityAnimation={opacityAnimation}
-                isLandscapeMode={isLandscapeMode}
-                translateAnimation={translateAnimation}
-
-            />;
 
     const handlePress = () => {
         rotation.value = withSequence(

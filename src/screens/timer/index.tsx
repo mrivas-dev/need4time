@@ -14,7 +14,7 @@ const TimerPage = ({ navigation }: any) => {
         <Layout style={styles.layoutContainer}>
             <View style={styles.container}>
                 <Laps onSelectLaps={(newLaps: number) => setLaps(newLaps)} />
-                <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} />
+                {/* <TimeSelector onTimeSelect={(newDuration) => setDuration(newDuration)} /> */}
             </View>
             <View style={{ width: 'auto', display: 'flex', flexDirection: 'row', alignSelf: 'center' }}>
                 <Timer initialDuration={duration} initialLaps={laps} />

@@ -2,14 +2,16 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Animated, Dimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Logo from "../../assets/img/transparent.png";
 import { appWrapperStyles, styles } from './styles';
 import { useOrientation } from '../../hooks/useOrientation';
+import { AppContext } from '../../provider';
+import Logo from "../../assets/img/transparent.png";
 
 const Splash = ({ children }: any) => {
-
-    const isLandscape = useOrientation() === 'landscape';
-
+    const isLandscapeUsingOrientation = useOrientation() === 'landscape';
+    const {
+        mode: { landscapeMode }
+      } = React.useContext(AppContext);
     const edges = useSafeAreaInsets();
     const startAnimation = React.useRef(new Animated.Value(0)).current;
     const animation_startAnimation = Animated.timing(startAnimation, { toValue: -Dimensions.get('window').height + (edges.top + 75), useNativeDriver: true });
@@ -77,7 +79,7 @@ const Splash = ({ children }: any) => {
                     transform: [
                         { translateY: contentTransition }
                     ]
-                }, appWrapperStyles({ isLandscape }))
+                }, appWrapperStyles({ isLandscape: landscapeMode || isLandscapeUsingOrientation}))
             }
             >
                 <StatusBar style="auto" />

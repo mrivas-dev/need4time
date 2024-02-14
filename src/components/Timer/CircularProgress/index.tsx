@@ -9,7 +9,6 @@ const StopWatch = ({
     keyId,
     duration,
     isStarted,
-    isFirstTen,
     isRunning,
     isFirstLap,
     isFinish,
@@ -50,8 +49,6 @@ const StopWatch = ({
                         keyId={keyId}
                         duration={duration}
                         isStarted={isStarted}
-                        isFirstLap={isFirstLap}
-                        isFirstTen={isFirstTen}
                         isRunning={isRunning}
                         isFinished={isFinish}
                         onPress={() => { setRunning(!isRunning); }}

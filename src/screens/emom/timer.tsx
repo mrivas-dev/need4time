@@ -4,14 +4,17 @@ import Layout from '../../components/Layout';
 import { styles } from './styles';
 import Timer from '../../components/Timer';
 import { useOrientation } from '../../hooks/useOrientation';
+import { AppContext } from '../../provider';
 
 const EMOMTimer = ({ navigation, route: { params: { laps, duration } } }) => {
-    const orientation = useOrientation();
-    const isLandscape = orientation === 'landscape';
+    const isLandscapeUsingOrientation = useOrientation() === 'landscape';
+    const {
+        mode: { landscapeMode }
+    } = React.useContext(AppContext);
     return (
         <Layout>
             <View style={styles.container}>
-                <Timer initialDuration={duration} initialLaps={laps} isLandscapeMode={isLandscape}/>
+                <Timer initialDuration={duration} initialLaps={laps} isLandscapeMode={landscapeMode || isLandscapeUsingOrientation} />
             </View>
         </Layout>
     )

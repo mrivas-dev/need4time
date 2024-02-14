@@ -1,11 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import CountdownCircleTimer from './CircularProgress/';
-import { containerStyles, styles } from './styles';
+import { containerStyles } from './styles';
 import TimerActions from './TimerActions';
 import { AppContext } from '../../provider';
 import Laps from '../Laps';
-import { Text } from 'react-native-paper';
 
 const Timer = ({
     initialDuration,
@@ -91,7 +90,6 @@ const Timer = ({
                 isRunning={isRunning}
                 isStarted={isStarted}
                 isFinish={isFinish}
-                isFirstTen={isFirstTen}
                 duration={isFirstTen ? 10 : totalDuration}
                 finishLap={onFinishLap}
                 setRunning={setRunning}
