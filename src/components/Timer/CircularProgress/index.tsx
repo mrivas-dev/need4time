@@ -12,6 +12,7 @@ const StopWatch = ({
     isRunning,
     isFirstLap,
     isFinish,
+    isFirstTen,
     setRunning,
     finishLap,
     isLandscapeMode,
@@ -51,6 +52,7 @@ const StopWatch = ({
                         isStarted={isStarted}
                         isRunning={isRunning}
                         isFinished={isFinish}
+                        isFirstTen={isFirstTen}
                         onPress={() => { setRunning(!isRunning); }}
                         isLandscapeMode={isLandscapeMode}
                         setRunning={setRunning}

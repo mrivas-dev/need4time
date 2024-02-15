@@ -12,16 +12,16 @@ const TimerActions = ({
 
     return (
         <View style={styles.timerActionsContainer}>
-            <IconButton
+            {/* <IconButton
                 icon={!!isRunning ? 'pause' : 'play'}
                 size={25}
                 mode="contained"
                 onPress={() => !!isFinish ? onStop() : setRunning(prev => !prev)}
-            />
+            /> */}
             <IconButton
                 icon="stop"
                 size={25}
-                mode="contained"
+                mode="outlined"
                 onPress={() => onStop()}
             />
         </View>

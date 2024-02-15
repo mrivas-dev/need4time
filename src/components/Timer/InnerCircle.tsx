@@ -23,13 +23,14 @@ const InnerCircle = ({
     isStarted,
     isRunning,
     isFinished,
+    isFirstTen,
     onPress,
     isLandscapeMode,
     setRunning,
     isFinish,
     onStop,
     currentLap,
-    initialLaps
+    initialLaps,
 }) => {
 
     const opacity = useSharedValue(0);
@@ -113,6 +114,7 @@ const InnerCircle = ({
                     wobbleStyle={wobbleStyle}
                 />
                 : <MetaLabel
+                    isFirstTen={isFirstTen}
                     currentLap={currentLap}
                     initialLaps={initialLaps}
                     isStarted={isStarted}

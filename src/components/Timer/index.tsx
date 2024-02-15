@@ -83,7 +83,7 @@ const Timer = ({
 
     return (
         <View style={containerStyles(isLandscapeMode)}>
-            {!isLandscapeMode && <Laps currentLap={currentLap} initialLaps={initialLaps} />}
+            {!isLandscapeMode && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
             <CountdownCircleTimer
                 keyId={`${key}`}
                 isFirstLap={currentLap === 1}
@@ -96,6 +96,7 @@ const Timer = ({
                 isLandscapeMode={isLandscapeMode}
                 currentLap={currentLap}
                 initialLaps={initialLaps}
+                isFirstTen={isFirstTen}
                 onStop={onStop}
             />
             {!isLandscapeMode && <TimerActions
@@ -105,20 +106,6 @@ const Timer = ({
                 isFinish={isFinish}
                 onStop={onStop}
             />}
-            {/* <Laps currentLap={currentLap} initialLaps={initialLaps} />
-            <CountdownCircleTimer
-                keyId={`${key}`}
-                isFirstLap={currentLap === 1}
-                isPlaying={isRunning}
-                isStarted={isStarted}
-                isFinish={isFinish}
-                isFirstTen={isFirstTen}
-                duration={isFirstTen ? 10 : totalDuration}
-                finishLap={onFinishLap}
-                setRunning={setRunning}
-                isLandscapeMode={isLandscapeMode}
-            />
-             */}
         </View>
     )
 }

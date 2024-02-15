@@ -9,39 +9,29 @@ import { AppContext } from '../../provider';
 const Modes = () => {
     const navigation = useNavigation();
     const isLandscapeUsingOrientation = useOrientation() === 'landscape';
-    const {
-        mode: { landscapeMode }
-    } = React.useContext(AppContext);
+
     return (
         <View
             style={styles.content}
         >
-            <Card style={modeCardStyles(landscapeMode || isLandscapeUsingOrientation)} mode="contained">
+            <Card style={modeCardStyles(isLandscapeUsingOrientation)} mode="contained">
                 <TouchableRipple onPress={() => navigation.navigate({ name: "Emom" } as never)} >
-                    <Card.Content>
-                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/MattFraserWBG.png')} />
-                    </Card.Content>
+                    <Card.Cover resizeMode="contain" style={styles.modeCardCover} source={ isLandscapeUsingOrientation ? require(`../../assets/modes/MattFraser.png`) : require(`../../assets/modes/EMOM.png`)} />
                 </TouchableRipple>
             </Card>
-            <Card style={modeCardStyles(landscapeMode || isLandscapeUsingOrientation)} mode="contained">
+            <Card style={modeCardStyles(isLandscapeUsingOrientation)} mode="contained">
                 <TouchableRipple onPress={() => navigation.navigate({ name: "Amrap" } as never)} >
-                    <Card.Content>
-                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/TiaClairToomeyWBG.png')} />
-                    </Card.Content>
+                    <Card.Cover resizeMode="contain" style={styles.modeCardCover} source={ isLandscapeUsingOrientation ? require(`../../assets/modes/TiaClairToomey.png`) : require(`../../assets/modes/AMRAP.png`)} />
                 </TouchableRipple>
             </Card>
-            <Card style={modeCardStyles(landscapeMode || isLandscapeUsingOrientation)} mode="contained">
+            <Card style={modeCardStyles(isLandscapeUsingOrientation)} mode="contained">
                 <TouchableRipple onPress={() => navigation.navigate({ name: "ForTime" } as never)} >
-                    <Card.Content>
-                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/TiaClairToomeyWBG.png')} />
-                    </Card.Content>
+                    <Card.Cover resizeMode="contain" style={styles.modeCardCover} source={ isLandscapeUsingOrientation ? require(`../../assets/modes/RichFroning.png`) : require(`../../assets/modes/FORTIME.png`)} />
                 </TouchableRipple>
             </Card>
-            <Card style={modeCardStyles(landscapeMode || isLandscapeUsingOrientation)} mode="contained">
+            <Card style={modeCardStyles(isLandscapeUsingOrientation)} mode="contained">
                 <TouchableRipple onPress={() => navigation.navigate({ name: "Settings" } as never)} >
-                    <Card.Content>
-                        <Card.Cover resizeMode="cover" style={styles.modeCardCover} source={require('../../assets/modes/MattFraserWBG.png')} />
-                    </Card.Content>
+                    <Card.Cover resizeMode="contain" style={styles.modeCardCover} source={ isLandscapeUsingOrientation ? require(`../../assets/modes/Fail.png`) : require(`../../assets/modes/Fail.png`)} />
                 </TouchableRipple >
             </Card>
         </View >

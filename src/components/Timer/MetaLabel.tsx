@@ -13,6 +13,7 @@ const MetaLabel = ({
     initialLaps,
     remainingTime,
     isStarted,
+    isFirstTen,
     opacityAnimation,
     isLandscapeMode,
     translateAnimation,
@@ -38,7 +39,7 @@ const MetaLabel = ({
             <View
                 style={styles.center}
             >
-                {isLandscapeMode && <Laps currentLap={currentLap} initialLaps={initialLaps} />}
+                {isLandscapeMode && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
                 <Text style={numberLabelStyles(isLandscapeMode)}>{calculateRemainingTimeText({ remainingTime })}</Text>
                 {isLandscapeMode && <TimerActions
                     isRunning={isRunning}
