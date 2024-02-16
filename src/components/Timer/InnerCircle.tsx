@@ -20,6 +20,8 @@ const EASING = Easing.elastic(1.5);
 const InnerCircle = ({
     keyId,
     duration,
+    isGrowing = false,
+    time,
     isStarted,
     isRunning,
     isFinished,
@@ -54,11 +56,11 @@ const InnerCircle = ({
         opacity: opacity.value
     }), []);
 
-    const { remainingTime } = useCountdown({
-        isPlaying: isRunning,
-        duration,
-        colors: `url(#${keyId})`,
-    });
+    // const { remainingTime } = useCountdown({
+    //     isPlaying: isRunning,
+    //     duration,
+    //     colors: `url(#${keyId})`,
+    // });
 
     React.useEffect(() => {
         offset.value = withRepeat(
@@ -114,12 +116,13 @@ const InnerCircle = ({
                     wobbleStyle={wobbleStyle}
                 />
                 : <MetaLabel
+                    isGrowing={isGrowing}
                     isFirstTen={isFirstTen}
                     currentLap={currentLap}
                     initialLaps={initialLaps}
                     isStarted={isStarted}
                     isRunning={isRunning}
-                    remainingTime={remainingTime}
+                    time={time}
                     opacityAnimation={opacityAnimation}
                     isLandscapeMode={isLandscapeMode}
                     translateAnimation={translateAnimation}

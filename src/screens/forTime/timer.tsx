@@ -6,7 +6,7 @@ import Timer from '../../components/Timer';
 import { AppContext } from '../../provider';
 import { useOrientation } from '../../hooks/useOrientation';
 
-const AMRAPTimer = ({ navigation, route: { params: { laps, duration, initialSeconds } } }) => {
+const FORTIMETimer = ({ navigation, route: { params: { initialSeconds } } }) => {
     const isLandscapeUsingOrientation = useOrientation() === 'landscape';
     const {
         mode: { landscapeMode }
@@ -14,10 +14,10 @@ const AMRAPTimer = ({ navigation, route: { params: { laps, duration, initialSeco
     return (
         <Layout>
             <View style={styles.container}>
-                <Timer countdownSeconds={initialSeconds} initialDuration={duration} initialLaps={1} isLandscapeMode={landscapeMode || isLandscapeUsingOrientation} />
+                <Timer countdownSeconds={initialSeconds} isGrowing={true} initialDuration={9999} initialLaps={1} isLandscapeMode={landscapeMode || isLandscapeUsingOrientation} />
             </View>
         </Layout>
     );
 }
 
-export default AMRAPTimer;
+export default FORTIMETimer;

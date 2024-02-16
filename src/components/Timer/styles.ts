@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     timerActionsContainer: {
         display: 'flex',
         flexDirection: 'row',
+        marginTop: 25,
         justifyContent: 'space-around',
     },
     smallLabel: {

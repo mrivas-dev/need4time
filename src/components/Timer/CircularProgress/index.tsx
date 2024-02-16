@@ -1,11 +1,12 @@
 import React from 'react';
-import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { View } from 'react-native';
 import InnerCircle from "../InnerCircle";
 import { AppContext } from '../../../provider/index';
-import { Dimensions, View } from 'react-native';
 import { countDownContainerStyles } from './styles';
 
 const StopWatch = ({
+    isGrowing = false,
     keyId,
     duration,
     isStarted,
@@ -27,6 +28,7 @@ const StopWatch = ({
             <CountdownCircleTimer
                 size={350}
                 key={keyId}
+                {...isGrowing ? { isGrowing: true } : {}}
                 isPlaying={isRunning}
                 duration={duration}
                 strokeWidth={isLandscapeMode ? 0 : 10}
@@ -45,14 +47,22 @@ const StopWatch = ({
                     }
                 }}
             >
-                {() => (
+                {({ remainingTime, elapsedTime }) => (
                     <InnerCircle
                         keyId={keyId}
                         duration={duration}
                         isStarted={isStarted}
+                        isGrowing={isGrowing}
                         isRunning={isRunning}
                         isFinished={isFinish}
                         isFirstTen={isFirstTen}
+                        time={
+                            isGrowing
+                                ? !isFirstTen
+                                    ? elapsedTime
+                                    : remainingTime
+                                : remainingTime
+                        }
                         onPress={() => { setRunning(!isRunning); }}
                         isLandscapeMode={isLandscapeMode}
                         setRunning={setRunning}

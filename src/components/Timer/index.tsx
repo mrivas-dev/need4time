@@ -7,6 +7,8 @@ import { AppContext } from '../../provider';
 import Laps from '../Laps';
 
 const Timer = ({
+    countdownSeconds = 10,
+    isGrowing = false,
     initialDuration,
     initialLaps,
     isLandscapeMode
@@ -83,14 +85,15 @@ const Timer = ({
 
     return (
         <View style={containerStyles(isLandscapeMode)}>
-            {!isLandscapeMode && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
+            {(!isLandscapeMode && !isGrowing) && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
             <CountdownCircleTimer
                 keyId={`${key}`}
                 isFirstLap={currentLap === 1}
                 isRunning={isRunning}
+                isGrowing={isGrowing}
                 isStarted={isStarted}
                 isFinish={isFinish}
-                duration={isFirstTen ? 10 : totalDuration}
+                duration={isFirstTen ? countdownSeconds : totalDuration}
                 finishLap={onFinishLap}
                 setRunning={setRunning}
                 isLandscapeMode={isLandscapeMode}
@@ -99,13 +102,7 @@ const Timer = ({
                 isFirstTen={isFirstTen}
                 onStop={onStop}
             />
-            {!isLandscapeMode && <TimerActions
-                isRunning={isRunning}
-                isStarted={isStarted}
-                setRunning={setRunning}
-                isFinish={isFinish}
-                onStop={onStop}
-            />}
+            {!isLandscapeMode && <TimerActions onStop={onStop} />}
         </View>
     )
 }

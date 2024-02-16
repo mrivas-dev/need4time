@@ -10,7 +10,7 @@ const LapsSelectorDialog = ({ visible, hideDialog, laps, setLaps, setVisible }) 
     return (
         <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-                <Dialog.Title>Total minutes</Dialog.Title>
+                <Dialog.Title>Total laps</Dialog.Title>
                 <Dialog.ScrollArea>
                     <ScrollView contentContainerStyle={styles.dialogSelectorContainer}>
                         <Picker

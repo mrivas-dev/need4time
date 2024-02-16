@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import { AntDesign } from '@expo/vector-icons';
-import { calculateRemainingTimeText } from '../../utils/timer';
+import { calculateElapsedTimeText, calculateRemainingTimeText } from '../../utils/timer';
 import { numberLabelStyles, styles } from './styles';
 import TimerActions from './TimerActions';
 import Laps from '../Laps';
@@ -11,15 +11,14 @@ import Laps from '../Laps';
 const MetaLabel = ({
     currentLap,
     initialLaps,
-    remainingTime,
-    isStarted,
-    isFirstTen,
+    time,
     opacityAnimation,
     isLandscapeMode,
     translateAnimation,
+    isGrowing,
+    isStarted,
+    isFirstTen,
     isRunning,
-    setRunning,
-    isFinish,
     onStop,
 }: any) => {
 
@@ -39,19 +38,14 @@ const MetaLabel = ({
             <View
                 style={styles.center}
             >
-                {isLandscapeMode && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
-                <Text style={numberLabelStyles(isLandscapeMode)}>{calculateRemainingTimeText({ remainingTime })}</Text>
-                {isLandscapeMode && <TimerActions
-                    isRunning={isRunning}
-                    isStarted={isStarted}
-                    setRunning={setRunning}
-                    isFinish={isFinish}
-                    onStop={onStop}
-                />}
+                {(isLandscapeMode && !isGrowing) && <Laps isFirstTen={isFirstTen} currentLap={currentLap} initialLaps={initialLaps} />}
+                <Text style={numberLabelStyles(isLandscapeMode)}>{isGrowing ? calculateElapsedTimeText({ elapsedTime: time }) : calculateRemainingTimeText({ remainingTime: time })}</Text>
+                {isFirstTen && <Text style={styles.smallLabel}> Initial countdown </Text>}
+                {isLandscapeMode && <TimerActions onStop={onStop} />}
             </View>
         )
             : (<View style={styles.center}>
-                <Text style={styles.smallLabel}>Remaining: {calculateRemainingTimeText({ remainingTime })}</Text>
+                <Text style={styles.smallLabel}>Remaining: {isGrowing ? calculateElapsedTimeText({ elapsedTime: time }) : calculateRemainingTimeText({ remainingTime: time })}</Text>
                 <Animated.View style={[opacityAnimation]}>
                     <AntDesign name="pause" size={isLandscapeMode ? 225 : 150} color="white" />
                 </Animated.View>

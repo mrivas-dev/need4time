@@ -37,7 +37,7 @@ const CountDownTimeSelector = ({ initialValue, label, onTimeSelect = (duration: 
             <Card onPress={() => { setVisible(true); }}>
                 <Card.Content>
                     <Text variant="titleLarge">
-                        {addZerosToTime(`${seconds}`)} seconds
+                        {addZerosToTime(`${seconds}`)} s
                     </Text>
                 </Card.Content>
             </Card>

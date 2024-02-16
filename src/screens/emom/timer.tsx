@@ -6,7 +6,7 @@ import Timer from '../../components/Timer';
 import { useOrientation } from '../../hooks/useOrientation';
 import { AppContext } from '../../provider';
 
-const EMOMTimer = ({ navigation, route: { params: { laps, duration } } }) => {
+const EMOMTimer = ({ navigation, route: { params: { laps, duration, initialSeconds } } }) => {
     const isLandscapeUsingOrientation = useOrientation() === 'landscape';
     const {
         mode: { landscapeMode }
@@ -14,7 +14,7 @@ const EMOMTimer = ({ navigation, route: { params: { laps, duration } } }) => {
     return (
         <Layout>
             <View style={styles.container}>
-                <Timer initialDuration={duration} initialLaps={laps} isLandscapeMode={landscapeMode || isLandscapeUsingOrientation} />
+                <Timer countdownSeconds={initialSeconds} initialDuration={duration} initialLaps={laps} isLandscapeMode={landscapeMode || isLandscapeUsingOrientation} />
             </View>
         </Layout>
     )
