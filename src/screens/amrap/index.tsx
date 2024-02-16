@@ -3,21 +3,26 @@ import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import TimeSelector from '../../components/TimeSelector';
 import Layout from '../../components/Layout';
+import CountDownTimeSelector from '../../components/CountDownSelector';
 import { PRIMARY_BLUE } from '../../utils/colors';
-import { styles } from './styles';
+import { buttonContainerStyle, styles, textContainerStyle } from './styles';
+import { AppContext } from '../../provider';
 
 const Amrap = ({ navigation }: any) => {
-    const [laps, setLaps] = React.useState<number>(0);
-    const [duration, setDuration] = React.useState<number>(0);
+    const { mode: { landscapeMode } } = React.useContext(AppContext);
 
+    const [laps] = React.useState<number>(0);
+    const [duration, setDuration] = React.useState<number>(0);
+    const [initialSeconds, setInitialSeconds] = React.useState<number>(10);
 
     return (
-        <Layout style={styles.container}>
+        <Layout style={textContainerStyle(landscapeMode)}>
             <View style={styles.textContainer}>
                 <Text variant="headlineMedium">AMRAP</Text>
             </View>
+            <CountDownTimeSelector initialValue={10} label="Countdown" onTimeSelect={(newDuration) => setInitialSeconds(newDuration)} />
             <TimeSelector label="For" onTimeSelect={(newDuration) => setDuration(newDuration)} />
-            <View style={styles.buttonContainer}>
+            <View style={buttonContainerStyle(landscapeMode)}>
                 <Button
                     style={styles.goToTimerButton}
                     textColor='white'
@@ -25,10 +30,11 @@ const Amrap = ({ navigation }: any) => {
                     mode="contained"
                     onPress={() => navigation.navigate('AmrapTimer', {
                         laps,
-                        duration
+                        duration,
+                        initialSeconds
                     })}
                 >
-                    Go
+                    Start
                 </Button>
             </View>
         </Layout>

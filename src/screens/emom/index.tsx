@@ -5,9 +5,9 @@ import { buttonContainerStyle, styles, textContainerStyle } from './styles';
 import Layout from '../../components/Layout';
 import Laps from '../../components/LapsSelector';
 import TimeSelector from '../../components/TimeSelector';
+import CountDownTimeSelector from '../../components/CountDownSelector';
 import { PRIMARY_BLUE } from '../../utils/colors';
 import { AppContext } from '../../provider';
-import CountDownTimeSelector from '../../components/CountDownSelector';
 
 const Emom = ({ navigation }: any) => {
     const { mode: { landscapeMode } } = React.useContext(AppContext);
