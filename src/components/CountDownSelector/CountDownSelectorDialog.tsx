@@ -5,21 +5,20 @@ import { styles } from './styles';
 import { white } from '../../utils/colors';
 import { Button, Dialog, Portal } from 'react-native-paper';
 
-const TimeSelectorDialog = ({ visible, hideDialog, minutes, setMinutes, seconds, setSeconds, setVisible }) => {
+const CountDownTimeSelectorDialog = ({ visible, hideDialog, seconds, setSeconds, setVisible }) => {
 
     return (
         <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-                <Dialog.Title>Select minutes and seconds</Dialog.Title>
+                <Dialog.Title>Select the countdown seconds</Dialog.Title>
                 <Dialog.ScrollArea>
                     <ScrollView contentContainerStyle={styles.dialogSelectorContainer}>
                         <Picker
                             numberOfLines={1}
-                            style={{ width: '50%' }}
+                            style={{ width: '100%' }}
                             itemStyle={{ color: white }}
-                            selectedValue={`${minutes}`}
-                            onValueChange={(itemValue) => setMinutes(itemValue)}
-                        >
+                            selectedValue={`${seconds}`}
+                            onValueChange={(itemValue) => setSeconds(itemValue)}>
                             <Picker.Item label="0" value="0" />
                             <Picker.Item label="1" value="1" />
                             <Picker.Item label="2" value="2" />
@@ -66,25 +65,20 @@ const TimeSelectorDialog = ({ visible, hideDialog, minutes, setMinutes, seconds,
                             <Picker.Item label="43" value="43" />
                             <Picker.Item label="44" value="44" />
                             <Picker.Item label="45" value="45" />
-                        </Picker>
-                        <Picker
-                            numberOfLines={1}
-                            style={{ width: '50%' }}
-                            itemStyle={{ color: white }}
-                            selectedValue={`${seconds}`}
-                            onValueChange={(itemValue) => setSeconds(itemValue)}>
-                            <Picker.Item label="0" value="0" />
-                            <Picker.Item label="5" value="5" />
-                            <Picker.Item label="10" value="10" />
-                            <Picker.Item label="15" value="15" />
-                            <Picker.Item label="20" value="20" />
-                            <Picker.Item label="25" value="25" />
-                            <Picker.Item label="30" value="30" />
-                            <Picker.Item label="35" value="35" />
-                            <Picker.Item label="40" value="40" />
-                            <Picker.Item label="45" value="45" />
+                            <Picker.Item label="46" value="46" />
+                            <Picker.Item label="47" value="47" />
+                            <Picker.Item label="48" value="48" />
+                            <Picker.Item label="49" value="49" />
                             <Picker.Item label="50" value="50" />
+                            <Picker.Item label="51" value="51" />
+                            <Picker.Item label="52" value="52" />
+                            <Picker.Item label="53" value="53" />
+                            <Picker.Item label="54" value="54" />
                             <Picker.Item label="55" value="55" />
+                            <Picker.Item label="56" value="56" />
+                            <Picker.Item label="57" value="57" />
+                            <Picker.Item label="58" value="58" />
+                            <Picker.Item label="59" value="59" />
                         </Picker>
                     </ScrollView>
                 </Dialog.ScrollArea>
@@ -96,4 +90,4 @@ const TimeSelectorDialog = ({ visible, hideDialog, minutes, setMinutes, seconds,
     );
 };
 
-export default TimeSelectorDialog;
+export default CountDownTimeSelectorDialog;

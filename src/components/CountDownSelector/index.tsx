@@ -2,37 +2,34 @@ import React from 'react'
 import { Card, Text } from 'react-native-paper';
 import { View } from 'react-native';
 import { containerStyles } from './styles';
-import TimeSelectorDialog from './SelectorDialog';
 import { addZerosToTime } from '../../utils/timer';
 import { AppContext } from '../../provider';
+import CountDownTimeSelectorDialog from './CountDownSelectorDialog';
 
-interface TimeSelectorProps {
+interface CountDownTimeSelectorProps {
     label: string;
     initialValue?: number;
     onTimeSelect: (duration: number) => void;
 }
-const TimeSelector = ({ initialValue, label, onTimeSelect = (duration: number) => { } }: TimeSelectorProps) => {
+const CountDownTimeSelector = ({ initialValue, label, onTimeSelect = (duration: number) => { } }: CountDownTimeSelectorProps) => {
 
     const { mode: { landscapeMode } } = React.useContext(AppContext);
 
-    const [minutes, setMinutes] = React.useState<number>(0);
-    const [seconds, setSeconds] = React.useState<number>(initialValue || 5);
+    const [seconds, setSeconds] = React.useState<number>(initialValue || 10);
 
     const [visible, setVisible] = React.useState(false);
     const hideDialog = () => setVisible(false);
 
     React.useEffect(() => {
-        onTimeSelect(Number(seconds) + Number(minutes * 60));
-    }, [minutes, seconds]);
+        onTimeSelect(Number(seconds));
+    }, [seconds]);
 
     return (
         <View style={containerStyles(landscapeMode)}>
-            <TimeSelectorDialog
+            <CountDownTimeSelectorDialog
                 visible={visible}
-                minutes={minutes}
                 seconds={seconds || initialValue}
                 hideDialog={hideDialog}
-                setMinutes={setMinutes}
                 setSeconds={setSeconds}
                 setVisible={setVisible}
             />
@@ -40,7 +37,7 @@ const TimeSelector = ({ initialValue, label, onTimeSelect = (duration: number) =
             <Card onPress={() => { setVisible(true); }}>
                 <Card.Content>
                     <Text variant="titleLarge">
-                        {addZerosToTime(`${minutes}`)} : {addZerosToTime(`${seconds}`)}
+                        {addZerosToTime(`${seconds}`)} seconds
                     </Text>
                 </Card.Content>
             </Card>
@@ -48,4 +45,4 @@ const TimeSelector = ({ initialValue, label, onTimeSelect = (duration: number) =
     );
 };
 
-export default TimeSelector;
+export default CountDownTimeSelector;

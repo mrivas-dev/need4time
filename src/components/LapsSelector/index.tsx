@@ -1,13 +1,17 @@
 import React from 'react'
 import { View } from 'react-native';
-import { styles } from './styles';
+import { containerStyles, styles } from './styles';
 import { Card, Text } from 'react-native-paper';
 import LapsSelectorDialog from './SelectorDialog';
+import { AppContext } from '../../provider';
+
 interface LapsProps {
     onSelectLaps: any;
 }
 
-const LapsSelector = ({ onSelectLaps = (laps: number) => {} }) => {
+const LapsSelector = ({ onSelectLaps = (laps: number) => { } }: LapsProps) => {
+    const { mode: { landscapeMode } } = React.useContext(AppContext);
+
     const [laps, setLaps] = React.useState<number>(1);
 
     const [visible, setVisible] = React.useState(false);
@@ -19,7 +23,7 @@ const LapsSelector = ({ onSelectLaps = (laps: number) => {} }) => {
         }
     }, [laps])
     return (
-        <View style={styles.newSelectorContainer}>
+        <View style={containerStyles(landscapeMode)}>
             <LapsSelectorDialog
                 visible={visible}
                 laps={laps}

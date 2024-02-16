@@ -1,25 +1,21 @@
 import { StyleSheet } from "react-native";
 
+export const containerStyles = (isLandscapeMode: boolean): any => ({
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: isLandscapeMode ? 'space-around' : 'space-between',
+    marginBottom: 15,
+    ...isLandscapeMode ? {} : {paddingHorizontal: 25}
+});
+
 export const styles = StyleSheet.create({
-    newSelectorContainer: {
+    container: {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginBottom: 25
-    },
-    timeSelectorContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-    },
-    labelContainer: {
-        width: '50%',
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: 15
     },
     dialogSelectorContainer: {
         display: 'flex',
